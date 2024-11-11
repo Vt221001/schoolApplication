@@ -187,3 +187,32 @@ export const deleteAdmin = wrapAsync(async (req, res) => {
         .json(new ApiResponse(200, admin, "Admin deleted successfully"));
 });
 
+export const verifyAdmin = wrapAsync(async (req, res) => {
+    const { accessToken } = req.body;
+
+    const decode = jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+    const { id, schoolCode } = decode;
+
+    console.log("id:", id, "schoolCode:", schoolCode);
+
+    const adminInSchoolDb = await Admin.findOne({
+        _id: id,
+        schoolCode: schoolCode,
+    });
+
+    if (adminInSchoolDb) {
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    adminInSchoolDb,
+                    "Admin verified successfully"
+                )
+            );
+    } else {
+        return res
+            .status(404)
+            .json(new ApiResponse(404, null, "Admin not found"));
+    }
+});
