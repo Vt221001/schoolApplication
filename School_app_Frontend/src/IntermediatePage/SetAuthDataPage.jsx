@@ -16,20 +16,36 @@ const SetAuthDataPage = () => {
     if (encodedUserData) {
       try {
         const userData = JSON.parse(decodeURIComponent(encodedUserData));
-        const { authToken, refreshToken, name, schoolCode, role, email, frontendUrl } = userData;
+        const {
+          authToken,
+          refreshToken,
+          name,
+          schoolCode,
+          role,
+          email,
+          frontendUrl,
+        } = userData;
 
-        const res = axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`, {
-          accessToken: authToken,
-        });
+        const res = axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`,
+          {
+            accessToken: authToken,
+          }
+        );
 
-        res.then((res) => {
-          console.log(res.data.data);
-          toast.success("User verified successfully.");
-        }).catch((err) => {
-          console.error(err);
-          toast.error("Invalid token. Please login again.");
+        res
+          .then((res) => {
+            console.log(res.data.data);
+            toast.success("User verified successfully.");
+          })
+          .catch((err) => {
+            console.error(err);
+            toast.error("Invalid token. Please login again.");
 
-        });
+            return (window.location.href = `${
+              import.meta.env.VITE_HOME_REDIRECT_URL
+            }`);
+          });
 
         const user = {
           name,
