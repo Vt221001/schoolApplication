@@ -65,9 +65,12 @@ export const updateSchool = wrapAsync(async (req, res) => {
 export const getSchoolNameByCode = wrapAsync(async (req, res) => {
     const { schoolCode } = req.body;
 
-    const school = await School.findOne({
-        schoolCode: schoolCode,
-    });
+    const school = await School.findOne(
+        {
+            schoolCode: { $regex: new RegExp(`^${schoolCode}$`, "i") },
+        },
+        { name: 1 } // Select 'name' and implicitly includes '_id' as well
+    );
 
     if (!school) {
         return res
@@ -77,5 +80,11 @@ export const getSchoolNameByCode = wrapAsync(async (req, res) => {
 
     return res
         .status(200)
-        .json(new ApiResponse(200, school, "School found successfully"));
+        .json(
+            new ApiResponse(
+                200,
+                { id: school._id, name: school.name },
+                "School found successfully"
+            )
+        );
 });
