@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-// Define the school schema
+
 const schoolSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -56,6 +56,10 @@ const schoolSchema = new mongoose.Schema({
     createdAt: {
         type: Date,
         default: Date.now(),
+    },
+    schoolCode: {
+        type: String,
+        required: true,
     },
 });
 

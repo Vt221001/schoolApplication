@@ -25,7 +25,7 @@ const generateAccessAndRefreshTokens = async (adminId, next) => {
   return { accessToken, refreshToken };
 };
 
-export const createMaster = wrapAsync(async (req, res, next) => {
+export const createMasterAdmin = wrapAsync(async (req, res, next) => {
   const { name, email, password, role, schoolCode, frontendUrl } = req.body;
 
   const master = await Master.create({
@@ -44,7 +44,7 @@ export const createMaster = wrapAsync(async (req, res, next) => {
   res.status(201).json(new ApiResponse(201, master));
 });
 
-export const getMaster = wrapAsync(async (req, res, next) => {
+export const getMasterAdmin = wrapAsync(async (req, res, next) => {
   const master = await Master.find();
 
   if (!master) {
@@ -54,7 +54,7 @@ export const getMaster = wrapAsync(async (req, res, next) => {
   res.status(200).json(new ApiResponse(200, master));
 });
 
-export const getMasterById = wrapAsync(async (req, res, next) => {
+export const getMasterAdminById = wrapAsync(async (req, res, next) => {
   const master = await Master.findById(req.params.id);
 
   if (!master) {
@@ -62,6 +62,42 @@ export const getMasterById = wrapAsync(async (req, res, next) => {
   }
 
   res.status(200).json(new ApiResponse(200, master));
+});
+
+export const updateMasterAdmin = wrapAsync(async (req, res, next) => {
+  const { name, email, password, role, schoolCode, frontendUrl } = req.body;
+  const { id } = req.params;
+
+  const master = await Master.findById(id);
+
+  if (!master) {
+    return next(new ApiError(404, "Master not found"));
+  }
+
+  master.name = name || master.name;
+  master.email = email || master.email;
+  master.password = password || master.password;
+  master.role = role || master.role;
+  master.schoolCode = schoolCode || master.schoolCode;
+  master.frontendUrl = frontendUrl || master.frontendUrl;
+
+  await master.save();
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, master, "Master updated successfully"));
+});
+
+export const deleteMasterAdmin = wrapAsync(async (req, res, next) => {
+  const master = await Master.findByIdAndDelete(req.params.id);
+
+  if (!master) {
+    return next(new ApiError(404, "Master not found"));
+  }
+
+  res
+    .status(200)
+    .json(new ApiResponse(200, master, "Master deleted successfully"));
 });
 
 export const loginMasterAdmin = wrapAsync(async (req, res, next) => {
@@ -78,13 +114,10 @@ export const loginMasterAdmin = wrapAsync(async (req, res, next) => {
     return next(new ApiError(404, "masteradmin does not exist"));
   }
 
-  console.log("masteradmin found:", masteradmin.email);
-
   const isPasswordValid = await masteradmin.isValidPassword(password);
   console.log("Is password valid:", isPasswordValid);
 
   if (!isPasswordValid) {
-    console.log("Invalid password attempt for admin:", masteradmin.email);
     return next(new ApiError(401, "Invalid admin credentials"));
   }
 
@@ -95,6 +128,8 @@ export const loginMasterAdmin = wrapAsync(async (req, res, next) => {
   masteradmin.refreshToken = refreshToken;
   await masteradmin.save({ validateBeforeSave: false });
 
+  const { password: _, ...masteradminData } = masteradmin.toObject();
+
   return res
     .status(200)
     .cookie("accessToken", accessToken)
@@ -103,7 +138,7 @@ export const loginMasterAdmin = wrapAsync(async (req, res, next) => {
       new ApiResponse(
         200,
         {
-          user: masteradmin,
+          user: masteradminData,
           accessToken,
           refreshToken,
         },
@@ -130,17 +165,17 @@ export const refreshAccessTokenAdmin = wrapAsync(async (req, res, next) => {
     return next(new ApiError(401, "Invalid refresh token"));
   }
 
-  const admin = await Admin.findById(decodedToken?.id);
-  if (!admin) {
+  const masteradmin = await Master.findById(decodedToken?.id);
+  if (!masteradmin) {
     return next(new ApiError(401, "Invalid refresh token"));
   }
 
-  if (incomingRefreshToken !== admin?.refreshToken) {
+  if (incomingRefreshToken !== masteradmin?.refreshToken) {
     return next(new ApiError(401, "Refresh token is expired or used"));
   }
 
   const { accessToken, refreshToken: newRefreshToken } =
-    await generateAccessAndRefreshTokens(admin._id);
+    await generateAccessAndRefreshTokens(masteradmin._id);
 
   return res
     .status(200)

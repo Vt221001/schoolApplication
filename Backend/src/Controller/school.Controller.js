@@ -61,3 +61,21 @@ export const updateSchool = wrapAsync(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, school));
 });
+
+export const getSchoolNameByCode = wrapAsync(async (req, res) => {
+    const { schoolCode } = req.body;
+
+    const school = await School.findOne({
+        schoolCode: schoolCode,
+    });
+
+    if (!school) {
+        return res
+            .status(404)
+            .json(new ApiResponse(404, null, "School not found"));
+    }
+
+    return res
+        .status(200)
+        .json(new ApiResponse(200, school, "School found successfully"));
+});

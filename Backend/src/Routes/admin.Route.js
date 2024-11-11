@@ -7,6 +7,7 @@ import {
     loginAdmin,
     refreshAccessTokenAdmin,
     updateAdmin,
+    verifyAdmin,
 } from "../Controller/admin.Controller.js";
 import { authenticateToken } from "../Middlewares/authenticateToken.js";
 import { authorizeRoles } from "../Middlewares/authorizeRoles.js";
@@ -26,5 +27,6 @@ router.delete("/delete-admin/:id", deleteAdmin);
 
 router.post("/login-admin", loginAdmin);
 router.post("/refresh-token-admin", refreshAccessTokenAdmin);
+router.post("/verify-admin", verifyAdmin);
 
 export { router as adminRoute };
