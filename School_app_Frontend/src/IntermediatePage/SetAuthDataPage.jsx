@@ -17,6 +17,19 @@ const SetAuthDataPage = () => {
         const userData = JSON.parse(decodeURIComponent(encodedUserData));
         const { authToken, refreshToken, name, schoolCode, role, email, frontendUrl } = userData;
 
+        const res = axios.post(`${VITE_BACKEND_URL}/api/verify-admin`, {
+          accessToken: authToken,
+        });
+
+        res.then((res) => {
+          console.log(res.data.data);
+          toast.success("User verified successfully.");
+        }).catch((err) => {
+          console.error(err);
+          toast.error("Invalid token. Please login again.");
+
+        });
+
         const user = {
           name,
           role,
@@ -32,7 +45,7 @@ const SetAuthDataPage = () => {
         console.error("Error parsing user data:", error);
       }
     } else {
-      window.location.href = `http://localhost:5173`;
+      window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
     }
   }, [location, navigate]);
 
