@@ -6,7 +6,7 @@ const RoleBasedAccess = ({ allowedRoles, children }) => {
   const { userRole, authToken } = useAuth();
 
   if (!authToken) {
-    return <Navigate to="/login" />;
+    return window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
   }
 
   if (allowedRoles.includes(userRole)) {

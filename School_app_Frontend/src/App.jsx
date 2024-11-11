@@ -72,10 +72,10 @@ import ClassFeesRecord from "./pages/Fees/ClassFeesRecord.jsx";
 import PaymentRecept from "./pages/Fees/PaymentRecept.jsx";
 import MonthlyFessPaymentQrRecept from "./pages/Fees/MonthlyFessPaymentQrRecept.jsx";
 import ErrorPage from "./pages/Error/ErrorPage.jsx";
-import ErrorBoundary from "./components/ErrorBoundry/ErrorBoundary.jsx";
 import AnimatedErrorPage from "./pages/Error/AnimatedErrorPage.jsx";
 import StudentAndParentExcelUpload from "./pages/UploadFiles/StudentAndParentExcelUpload.jsx";
 import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
+import SetAuthDataPage from "./IntermediatePage/SetAuthDataPage.jsx";
 
 const App = () => {
   const { userRole, authToken } = useAuth();
@@ -146,6 +146,7 @@ const App = () => {
     createRoutesFromElements(
       <>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/settingupdata" element={<SetAuthDataPage />} />
         <Route
           path="/school"
           element={authToken ? <Layout /> : <Navigate to="/" />}
