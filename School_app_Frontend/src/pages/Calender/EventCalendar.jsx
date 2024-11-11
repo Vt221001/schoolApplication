@@ -54,7 +54,7 @@ const EventCalendar = () => {
       <div className="flex items-center">
         <button
           className="text-purple-400 hover:bg-gray-700 p-2 rounded-md"
-          onClick={() => onNavigate("PREV")}
+          onClick={() => on("PREV")}
         >
           {"<"}
         </button>

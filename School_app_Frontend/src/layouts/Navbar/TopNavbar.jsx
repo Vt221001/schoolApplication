@@ -24,8 +24,10 @@ const TopNavbar = ({ isCollapsed }) => {
     const fetchSchoolName = async () => {
       if (schoolId) {
         try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/get-school/${schoolId}`
+          const response = await axios.post(
+            `${import.meta.env.VITE_BACKEND_URL}/api/school-name-byschoolcode`, {
+              schoolCode: schoolId,
+            }
           );
           setSchoolName(response.data.data.name);
         } catch (error) {
