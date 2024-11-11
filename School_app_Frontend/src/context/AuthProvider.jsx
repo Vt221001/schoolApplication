@@ -43,6 +43,9 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("authToken");
     return token ? jwtDecode(token).role : null;
   });
+  const [frontendUrl, setFrontendUrl] = useState(() =>
+    localStorage.getItem("frontendUrl")
+  );
   const [loading, setLoading] = useState(true);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [schoolId, setSchoolId] = useState();
@@ -50,14 +53,14 @@ export const AuthProvider = ({ children }) => {
     const handleTokenRefresh = async () => {
       if (authToken) {
         const decodedToken = jwtDecode(authToken);
-        const currentTime = Date.now() / 1000;  
+        const currentTime = Date.now() / 1000;
 
         if (decodedToken.exp < currentTime + 60) {
           if (refreshToken) {
             await refreshAuthToken(refreshToken, decodedToken.role);
           } else {
             logout();
-            navigate("/login");
+            window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
           }
         }
       }
@@ -98,15 +101,21 @@ export const AuthProvider = ({ children }) => {
       if (!isLoggingOut) {
         setIsLoggingOut(true);
         logout();
-        navigate("/login");
+        window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
       }
     }
   };
 
-  const login = async (authToken, refreshToken, user, schoolId) => {
+  const login = async (
+    authToken,
+    refreshToken,
+    user,
+    schoolCode,
+  ) => {
     setAuthToken(authToken);
     setRefreshToken(refreshToken);
-    setSchoolId(schoolId);
+    setSchoolId(schoolCode);
+    setFrontendUrl(user.frontendUrl);
     let userName;
     if (user.role === "Student") {
       userName = user.firstName;
@@ -128,6 +137,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("refreshToken", refreshToken);
     localStorage.setItem("name", userName);
     localStorage.setItem("schoolId", schoolId);
+    localStorage.setItem("frontendUrl", frontendUrl);
   };
 
   const logout = (showToast = true) => {
@@ -138,13 +148,15 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("name");
     localStorage.removeItem("schoolId");
+    localStorage.removeItem("frontendUrl");
+
 
     if (showToast) {
       console.log("Logged out successfully!");
     }
 
     setIsLoggingOut(false);
-    // navigate("/"); // Uncomment if you want to navigate after logout
+    window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
   };
 
   return (

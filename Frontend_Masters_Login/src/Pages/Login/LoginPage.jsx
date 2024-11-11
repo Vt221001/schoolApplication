@@ -19,7 +19,7 @@ const LoginPage = () => {
       case "Admin":
         apiEndpoint = `${
           import.meta.env.VITE_BACKEND_URL
-        }/api/login/login-admin`;
+        }/api/login-master-admin`;
         break;
       default:
         setError("Invalid role selected.");
@@ -38,7 +38,7 @@ const LoginPage = () => {
         }
       );
 
-      const { accessToken, refreshToken, user } = response.data.data;
+      const { accessToken, refreshToken, user } = await response.data.data;
       const schoolCode = user.schoolCode; // School ka unique code
 
       console.log("Login successful. User:", user);
@@ -48,12 +48,16 @@ const LoginPage = () => {
         authToken: accessToken,
         refreshToken,
         name: user.name,
-        schoolId: user.school,
+        schoolCode: user.schoolCode,
+        role: user.role,
+        email: user.email,
+        frontendUrl: user.frontendUrl
+
       });
 
       // JSON string ko URI mein encode karke pass karenge
       const encodedUserData = encodeURIComponent(userData);
-      window.location.href = `http://${schoolCode}.localhost:5174/settingupdata?userData=${encodedUserData}`;
+      window.location.href = `${user.frontendUrl}/settingupdata?userData=${encodedUserData}`;
 
       toast.success("Login successful.");
     } catch (err) {
