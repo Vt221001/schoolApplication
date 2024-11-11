@@ -42,7 +42,8 @@ const whitelist = [
     /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5174$/,
 ];
 
-// CORS configuration
+// CORS configuration hai
+
 const corsOptions = {
     origin: function (origin, callback) {
         if (
