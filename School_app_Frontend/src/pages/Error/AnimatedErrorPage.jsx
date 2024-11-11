@@ -42,7 +42,7 @@ const AnimatedErrorPage = () => {
           Reload Page
         </button>
         <button
-          onClick={() => navigate('/')}
+          onClick={() => window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300"
         >
           Go to Home

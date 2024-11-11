@@ -14,7 +14,7 @@ const ErrorPage = () => {
         <br />
         Don't worry, it's probably just lost in the internet abyss.
       </p>
-      <button onClick={() => navigate("/")} className="error-button">
+      <button onClick={() => window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`} className="error-button">
         Take Me Home
       </button>
     </div>

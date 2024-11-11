@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import PyramidLoader from "../common/Loader/PyramidLoader";
+import axios from "axios";
 
 const SetAuthDataPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const SetAuthDataPage = () => {
         const userData = JSON.parse(decodeURIComponent(encodedUserData));
         const { authToken, refreshToken, name, schoolCode, role, email, frontendUrl } = userData;
 
-        const res = axios.post(`${VITE_BACKEND_URL}/api/verify-admin`, {
+        const res = axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`, {
           accessToken: authToken,
         });
 

@@ -145,7 +145,7 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<LoginPage />} />
+        {/* <Route path="/" element={<LoginPage />} /> */}
         <Route path="/settingupdata" element={<SetAuthDataPage />} />
         <Route
           path="/school"
