@@ -78,7 +78,7 @@ import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
 import SetAuthDataPage from "./IntermediatePage/SetAuthDataPage.jsx";
 
 const App = () => {
-  const { userRole, authToken } = useAuth();
+  const { userRole, authToken, loading } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -141,6 +141,10 @@ const App = () => {
       },
     ],
   };
+
+  if (loading) {
+    return <PyramidLoader desc={"Loading..."} />;
+  }
 
   const router = createBrowserRouter(
     createRoutesFromElements(
