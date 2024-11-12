@@ -76,9 +76,10 @@ import AnimatedErrorPage from "./pages/Error/AnimatedErrorPage.jsx";
 import StudentAndParentExcelUpload from "./pages/UploadFiles/StudentAndParentExcelUpload.jsx";
 import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
 import SetAuthDataPage from "./IntermediatePage/SetAuthDataPage.jsx";
+import PyramidLoader from "./common/Loader/PyramidLoader.jsx";
 
 const App = () => {
-  const { userRole, authToken } = useAuth();
+  const { userRole, authToken, loading } = useAuth();
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -141,6 +142,10 @@ const App = () => {
       },
     ],
   };
+
+  if (loading) {
+    return <PyramidLoader desc={"Loading..."} />;
+  }
 
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -730,7 +735,7 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="*" element={<PyramidLoader />} /> */}
         <Route path="/error" element={<AnimatedErrorPage />} />
       </>
     )

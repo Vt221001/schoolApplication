@@ -49,6 +49,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [schoolId, setSchoolId] = useState();
+  
   useEffect(() => {
     const handleTokenRefresh = async () => {
       if (authToken) {
@@ -112,6 +113,7 @@ export const AuthProvider = ({ children }) => {
     user,
     schoolCode,
   ) => {
+    setLoading(true); // Show loader during login
     setAuthToken(authToken);
     setRefreshToken(refreshToken);
     setSchoolId(schoolCode);
@@ -138,9 +140,11 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("name", userName);
     localStorage.setItem("schoolId", schoolId);
     localStorage.setItem("frontendUrl", frontendUrl);
+    setLoading(false); // Hide loader after login
   };
 
   const logout = (showToast = true) => {
+    setLoading(true); // Show loader during logout
     setAuthToken(null);
     setRefreshToken(null);
     setUserRole(null);
@@ -150,13 +154,13 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("schoolId");
     localStorage.removeItem("frontendUrl");
 
-
     if (showToast) {
       console.log("Logged out successfully!");
     }
 
     setIsLoggingOut(false);
     window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
+    setLoading(false); // Hide loader after logout
   };
 
   return (
@@ -173,7 +177,7 @@ export const AuthProvider = ({ children }) => {
           schoolId,
         }}
       >
-        {!loading ? children : <PyramidLoader desc={""} />}
+        {!loading ? children : <PyramidLoader desc={"Loading..."} />}
       </AuthContext.Provider>
     </div>
   );

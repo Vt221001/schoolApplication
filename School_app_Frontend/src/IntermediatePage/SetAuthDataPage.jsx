@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import PyramidLoader from "../common/Loader/PyramidLoader";
 import axios from "axios";
+import { toast } from "react-toastify";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 
 const SetAuthDataPage = () => {
   const navigate = useNavigate();
@@ -26,45 +28,43 @@ const SetAuthDataPage = () => {
           frontendUrl,
         } = userData;
 
-        const res = axios.post(
-          `${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`,
-          {
+        axios
+          .post(`${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`, {
             accessToken: authToken,
-          }
-        );
-
-        res
+          })
           .then((res) => {
             console.log(res.data.data);
             toast.success("User verified successfully.");
+
+            const user = {
+              name,
+              role,
+              email,
+              frontendUrl,
+            };
+
+            // Login and set user data
+            login(authToken, refreshToken, user, schoolCode);
+            window.location.replace("/school/dashboard");
+
+            // Clean URL and redirect to dashboard
+            window.history.replaceState(null, null, "/school/dashboard");
           })
           .catch((err) => {
-            console.error(err);
+            console.error("Verification failed:", err);
             toast.error("Invalid token. Please login again.");
 
-            return (window.location.href = `${
-              import.meta.env.VITE_HOME_REDIRECT_URL
-            }`);
+            // Redirect to home URL if verification fails
+            window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
           });
-
-        const user = {
-          name,
-          role,
-          email,
-          frontendUrl,
-        };
-
-        login(authToken, refreshToken, user, schoolCode);
-
-        // Clean URL and redirect
-        window.history.replaceState(null, null, "/school/dashboard");
       } catch (error) {
         console.error("Error parsing user data:", error);
+        window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
       }
     } else {
       window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
     }
-  }, [location, navigate]);
+  }, [location, login]);
 
   useEffect(() => {
     if (!loading) {
@@ -74,7 +74,7 @@ const SetAuthDataPage = () => {
 
   return loading ? (
     <PyramidLoader desc={"Hang tight, we're almost there!"} />
-  ) : null;
+  ) : <AdminDashboard/>;
 };
 
 export default SetAuthDataPage;
