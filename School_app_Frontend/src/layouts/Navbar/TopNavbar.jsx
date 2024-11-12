@@ -22,33 +22,20 @@ const TopNavbar = ({ isCollapsed }) => {
   const [schoolName, setSchoolName] = useState("");
   useEffect(() => {
     const fetchSchoolName = async () => {
-      if (schoolId) {
-        try {
-          const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/school-name-byschoolcode`,
-            {
-              schoolCode: schoolId,
-            }
-          );
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/get-school/${
+            import.meta.env.VITE_SchoolId
+          }`
+        );
+
+        if (response?.data?.data?.name) {
           setSchoolName(response.data.data.name);
-        } catch (error) {
-          console.error("Error fetching school name:", error);
-          toast.error("Error fetching school name.");
+        } else {
+          throw new Error("School name not found in response");
         }
-      } else if (import.meta.env.VITE_SchoolId) {
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/get-school/${
-              import.meta.env.VITE_SchoolId
-            }`
-          );
-          setSchoolName(response.data.data.name);
-        } catch (error) {
-          console.error("Error fetching school name:", error);
-          toast.error("Error fetching school name.");
-        }
-      }
-      else{
+      } catch (error) {
+        console.error("Error fetching school name:", error);
         toast.error("Unable to fetch school name.");
       }
     };
@@ -263,5 +250,5 @@ const TopNavbar = ({ isCollapsed }) => {
   );
 };
 
-export default TopNavbar;   
+export default TopNavbar;
 // kjkj
