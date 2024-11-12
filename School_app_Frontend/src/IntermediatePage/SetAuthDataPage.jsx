@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthProvider";
 import PyramidLoader from "../common/Loader/PyramidLoader";
 import axios from "axios";
 import { toast } from "react-toastify";
+import AdminDashboard from "../pages/Dashboard/AdminDashboard";
 
 const SetAuthDataPage = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const SetAuthDataPage = () => {
 
   return loading ? (
     <PyramidLoader desc={"Hang tight, we're almost there!"} />
-  ) : null;
+  ) : <AdminDashboard/>;
 };
 
 export default SetAuthDataPage;

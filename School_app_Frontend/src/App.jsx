@@ -735,7 +735,7 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="*" element={<PyramidLoader />} />
+        {/* <Route path="*" element={<PyramidLoader />} /> */}
         <Route path="/error" element={<AnimatedErrorPage />} />
       </>
     )
