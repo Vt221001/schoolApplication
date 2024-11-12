@@ -24,7 +24,6 @@ const getRefreshEndpoint = (role) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [name, setName] = useState(() => {
     const storedName = localStorage.getItem("name");
     try {
@@ -142,7 +141,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("name", userName);
     localStorage.setItem("schoolId", schoolId);
     localStorage.setItem("frontendUrl", frontendUrl);
-    navigate("/school/dashboard");
+    
     setLoading(false); // Hide loader after login
   };
 
