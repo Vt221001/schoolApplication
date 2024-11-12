@@ -150,11 +150,11 @@ const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
-        <Route path="/" element={<LoginPage />} />
+        {/* <Route path="/" element={<LoginPage />} /> */}
         <Route path="/settingupdata" element={<SetAuthDataPage />} />
         <Route
           path="/school"
-          element={authToken ? <Layout /> : (window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`, null)}
+          element={authToken ? <Layout /> : <Navigate to="/" />}
         >
           <Route
             path="dashboard"
