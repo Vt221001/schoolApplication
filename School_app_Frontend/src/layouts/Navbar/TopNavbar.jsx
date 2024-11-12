@@ -19,7 +19,7 @@ function classNames(...classes) {
 const TopNavbar = ({ isCollapsed }) => {
   const { logout, name, userRole, authToken, schoolId } = useAuth();
   const navigate = useNavigate();
-  const [schoolName, setSchoolName] = useState("");
+  const [schoolName, setSchoolName] = useState("Your School Name Here");
   useEffect(() => {
     const fetchSchoolName = async () => {
       try {
