@@ -77,6 +77,7 @@ import StudentAndParentExcelUpload from "./pages/UploadFiles/StudentAndParentExc
 import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
 import SetAuthDataPage from "./IntermediatePage/SetAuthDataPage.jsx";
 import PyramidLoader from "./common/Loader/PyramidLoader.jsx";
+import ErrorBoundary from "./components/ErrorBoundry/ErrorBoundary.jsx";
 
 const App = () => {
   const { userRole, authToken, loading } = useAuth();
@@ -152,589 +153,591 @@ const App = () => {
       <>
         {/* <Route path="/" element={<LoginPage />} /> */}
         <Route path="/settingupdata" element={<SetAuthDataPage />} />
-        <Route
-          path="/school"
-          element={authToken ? <Layout /> : <Navigate to="/" />}
-        >
-          <Route
-            path="dashboard"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
-              >
-                <Dashboard role={userRole} />
-              </RoleBasedAccess>
-            }
-          />
-          <Route path="testing" element={<Testing />} />
-          <Route
-            path="student-admission/:studentId?"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                {" "}
-                <StudentAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="parent-add/:Id"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                {" "}
-                <ParentAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-information"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <StudnetInfo />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="staff-add"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StaffAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="all-staffs"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StaffInfo />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="staff-update/:staffId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StaffAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="parent-information"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <ParentInfo />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="calendar"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <EventCalendar />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="create-notice"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <Notice />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="profile/:studentId"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
-              >
-                <Profile />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="attendance"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <Attendence />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-attendance"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <TeacherAttendance />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="staff-attendance"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StaffAttendance />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="all-teachers"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <TeacherInfo />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="parent-profile/:parentId"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Parent", "Teacher", "Student"]}
-              >
-                {" "}
-                <ParentProfile />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="parent-update/:parentId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                {" "}
-                <ParentAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="parent-update-student/:studentId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <ParentAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="add-conatct-information"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ContactDetails />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-profile/:teacherId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <TeacherProfile />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-update/:teacherId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <TeacherAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-add"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <TeacherAdd />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="add-marks"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <AddMarks />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="create-section"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                {" "}
-                <CreateSection />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="create-class"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <CreateClass />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="add-subjects"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <AddSubjects />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="create-subject-group"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <CreateSubjectGroup />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-notice"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
-              >
-                <ViewNotice />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="exam-group"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ExamGrpup />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="exam-type"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ExamType />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="exam-schedule"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ExaminationSchedule />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="class-timetable"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ClassTimetable />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-contact"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <ViewContact />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="add-home-work"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <AddHomeWork />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-home-work"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <ViewHomeWork />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="manage-lesson-plan"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <ManageLessonPlan />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="syallabus-status"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <SyallabusStatus />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-lesson-Plan"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <LessonPlanStudent />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-homework"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <HomeWorkStudent />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-syallabus-status"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <SyallabusStatusStudent />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-fees"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <StudentFees />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="class-timetable-user"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <CommonClassTimeTable />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-timetable"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                {" "}
-                <TeacherTimetable />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="create-timetable"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                {" "}
-                <CreateTimetabel />
-              </RoleBasedAccess>
-            }
-          />
-          <Route path="assign-teacher" element={<AssingTeacher />} />
-          <Route
-            path="students-results"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StudentsResults />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-exam-schedule"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <ViewExaminationSchedule />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-marks"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <ViewMarks />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-exam-schedule-student-and-parent"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
-              >
-                <ViewExaminationScheduleForStudentAndParent />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="view-result"
-            element={
-              <RoleBasedAccess allowedRoles={["Student", "Parent"]}>
-                <ShowStudentResult />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="student-attendance-view/:studentId?"
-            element={
-              <RoleBasedAccess
-                allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
-              >
-                <StudentAttendance />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="teacher-attendance-view/:teacherId?"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
-                <StudentAttendance />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="staff-attendance-view/:staffId?"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin", "Staff"]}>
-                <StudentAttendance />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/print"
-            element={
-              <AdmitCardPrint
-                students={data.students}
-                commonInfo={data.commonInfo}
-              />
-            }
-          />
-          <Route path="/school/resultp" element={<ResultPrint />} />
-          <Route
-            path="/school/fees-discount"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <FeesDiscount />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/assign-discount/:discount_id"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <AssignDiscount />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/create-fees"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                {" "}
-                <CreateFees_h />{" "}
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/fees-installment"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <FeesInstallment />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/student-fees-page"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StudentsFeesPage />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/fee-submission/:studentId"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <FeeSubmmission />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/class-fees-record"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <ClassFeesRecord />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/payment-recept-siblings"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <PaymentRecept />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/monthly-fees-payment"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <MonthlyFessPaymentQrRecept />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/upload-student-records"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <StudentAndParentExcelUpload />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/upload-student-attendance-records"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/upload-teacher-records"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/upload-teacher-attendance-records"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
-              </RoleBasedAccess>
-            }
-          />
-          <Route
-            path="/school/upload-staff-records"
-            element={
-              <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
-              </RoleBasedAccess>
-            }
-          />
-        </Route>
+        <ErrorBoundary>
+          <Route
+            path="/school"
+            element={authToken ? <Layout /> : <Navigate to="/" />}
+          >
+            <Route
+              path="dashboard"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
+                >
+                  <Dashboard role={userRole} />
+                </RoleBasedAccess>
+              }
+            />
+            <Route path="testing" element={<Testing />} />
+            <Route
+              path="student-admission/:studentId?"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  {" "}
+                  <StudentAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="parent-add/:Id"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  {" "}
+                  <ParentAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-information"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <StudnetInfo />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="staff-add"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StaffAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="all-staffs"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StaffInfo />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="staff-update/:staffId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StaffAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="parent-information"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <ParentInfo />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="calendar"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <EventCalendar />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="create-notice"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <Notice />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="profile/:studentId"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
+                >
+                  <Profile />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="attendance"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <Attendence />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-attendance"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <TeacherAttendance />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="staff-attendance"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StaffAttendance />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="all-teachers"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <TeacherInfo />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="parent-profile/:parentId"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Parent", "Teacher", "Student"]}
+                >
+                  {" "}
+                  <ParentProfile />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="parent-update/:parentId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  {" "}
+                  <ParentAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="parent-update-student/:studentId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <ParentAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="add-conatct-information"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ContactDetails />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-profile/:teacherId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <TeacherProfile />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-update/:teacherId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <TeacherAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-add"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <TeacherAdd />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="add-marks"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <AddMarks />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="create-section"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  {" "}
+                  <CreateSection />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="create-class"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <CreateClass />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="add-subjects"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <AddSubjects />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="create-subject-group"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <CreateSubjectGroup />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-notice"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
+                >
+                  <ViewNotice />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="exam-group"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ExamGrpup />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="exam-type"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ExamType />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="exam-schedule"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ExaminationSchedule />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="class-timetable"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ClassTimetable />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-contact"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <ViewContact />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="add-home-work"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <AddHomeWork />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-home-work"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <ViewHomeWork />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="manage-lesson-plan"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <ManageLessonPlan />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="syallabus-status"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <SyallabusStatus />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-lesson-Plan"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <LessonPlanStudent />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-homework"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <HomeWorkStudent />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-syallabus-status"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <SyallabusStatusStudent />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-fees"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <StudentFees />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="class-timetable-user"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <CommonClassTimeTable />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-timetable"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  {" "}
+                  <TeacherTimetable />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="create-timetable"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  {" "}
+                  <CreateTimetabel />
+                </RoleBasedAccess>
+              }
+            />
+            <Route path="assign-teacher" element={<AssingTeacher />} />
+            <Route
+              path="students-results"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StudentsResults />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-exam-schedule"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <ViewExaminationSchedule />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-marks"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <ViewMarks />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-exam-schedule-student-and-parent"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Teacher", "Student", "Parent"]}
+                >
+                  <ViewExaminationScheduleForStudentAndParent />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="view-result"
+              element={
+                <RoleBasedAccess allowedRoles={["Student", "Parent"]}>
+                  <ShowStudentResult />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="student-attendance-view/:studentId?"
+              element={
+                <RoleBasedAccess
+                  allowedRoles={["Admin", "Student", "Parent", "Teacher"]}
+                >
+                  <StudentAttendance />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="teacher-attendance-view/:teacherId?"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Teacher"]}>
+                  <StudentAttendance />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="staff-attendance-view/:staffId?"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin", "Staff"]}>
+                  <StudentAttendance />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/print"
+              element={
+                <AdmitCardPrint
+                  students={data.students}
+                  commonInfo={data.commonInfo}
+                />
+              }
+            />
+            <Route path="/school/resultp" element={<ResultPrint />} />
+            <Route
+              path="/school/fees-discount"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <FeesDiscount />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/assign-discount/:discount_id"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <AssignDiscount />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/create-fees"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  {" "}
+                  <CreateFees_h />{" "}
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/fees-installment"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <FeesInstallment />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/student-fees-page"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StudentsFeesPage />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/fee-submission/:studentId"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <FeeSubmmission />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/class-fees-record"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <ClassFeesRecord />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/payment-recept-siblings"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <PaymentRecept />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/monthly-fees-payment"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <MonthlyFessPaymentQrRecept />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/upload-student-records"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <StudentAndParentExcelUpload />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/upload-student-attendance-records"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <WorkInProgress />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/upload-teacher-records"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <WorkInProgress />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/upload-teacher-attendance-records"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <WorkInProgress />
+                </RoleBasedAccess>
+              }
+            />
+            <Route
+              path="/school/upload-staff-records"
+              element={
+                <RoleBasedAccess allowedRoles={["Admin"]}>
+                  <WorkInProgress />
+                </RoleBasedAccess>
+              }
+            />
+          </Route>
+        </ErrorBoundary>
         {/* <Route path="*" element={<PyramidLoader />} /> */}
         <Route path="/error" element={<AnimatedErrorPage />} />
       </>
