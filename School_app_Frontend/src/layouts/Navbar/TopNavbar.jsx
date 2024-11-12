@@ -54,7 +54,7 @@ const TopNavbar = ({ isCollapsed }) => {
     };
 
     fetchSchoolName();
-  }, [schoolId]);
+  }, []);
 
   const navigation = [{ name: schoolName, href: "#", current: false }];
 
