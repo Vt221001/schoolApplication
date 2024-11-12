@@ -734,7 +734,7 @@ const App = () => {
             }
           />
         </Route>
-        <Route path="*" element={<ErrorPage />} />
+        {/* <Route path="*" element={<ErrorPage />} /> */}
         <Route path="/error" element={<AnimatedErrorPage />} />
       </>
     )
