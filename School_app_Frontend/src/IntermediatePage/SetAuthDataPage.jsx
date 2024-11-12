@@ -45,7 +45,7 @@ const SetAuthDataPage = () => {
 
             // Login and set user data
             login(authToken, refreshToken, user, schoolCode);
-            navigate("/school/dashboard");
+            window.location.replace("/school/dashboard");
 
             // Clean URL and redirect to dashboard
             window.history.replaceState(null, null, "/school/dashboard");
