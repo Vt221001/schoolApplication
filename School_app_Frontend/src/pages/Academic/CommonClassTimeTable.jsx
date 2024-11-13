@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useAuth } from "../context/AuthProvider.jsx";
+import { useAuth } from "../../context/AuthProvider";
 import {
   AiOutlineClockCircle,
   AiOutlineBook,

@@ -6,7 +6,7 @@ const ResultPrint = ({ data2 }) => {
   // Hard-coded data (replace with your API response data)
   const { studentProfile, subjects } = data2;
 
-  console.log("subject rec " ,subjects);
+  console.log("subject rec ", subjects);
   const data = {
     commonData: {
       schoolName: "Vardhan International School",
@@ -172,28 +172,32 @@ const ResultPrint = ({ data2 }) => {
               <td className="border border-black">{subject.term1?.unitTest}</td>
               <td className="border border-black">{subject.term1?.internal}</td>
               <td className="border border-black">
-                {subject.term1.halfYearly}
+                {subject.term1?.halfYearly}
               </td>
               <td className="border border-black">{subject.term1?.total}</td>
-              <td className="border border-black">{subject.term2?.unitTest2}</td>
-              <td className="border border-black">{subject.term2?.internal2}</td>
+              <td className="border border-black">
+                {subject.term2?.unitTest2}
+              </td>
+              <td className="border border-black">
+                {subject.term2?.internal2}
+              </td>
               <td className="border border-black">{subject.term2?.annual}</td>
               <td className="border border-black">{subject.term2?.total}</td>
               <td className="border border-black">{subject?.overallTotal}</td>
             </tr>
           ))}
-          <tr key={idx} className="border-t">
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-              <td className="border border-black"></td>
-            </tr>
+          <tr className="border-t">
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+            <td className="border border-black"></td>
+          </tr>
         </tbody>
       </table>
 
@@ -327,4 +331,4 @@ const ResultPrint = ({ data2 }) => {
 };
 
 export default ResultPrint;
-// 
+//
