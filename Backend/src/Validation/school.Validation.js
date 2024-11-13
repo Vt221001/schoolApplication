@@ -49,4 +49,5 @@ export const schoolValidationSchema = Joi.object({
         })
     ),
     createdAt: Joi.date().default(Date.now),
+    schoolCode: Joi.string().required(),
 });
