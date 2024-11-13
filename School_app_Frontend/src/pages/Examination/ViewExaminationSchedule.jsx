@@ -280,22 +280,25 @@ const ViewExaminationSchedule = () => {
             isOpen={isModalOpen}
             onRequestClose={() => setIsModalOpen(false)}
             contentLabel="Select Students Modal"
-            className="relative w-full max-w-2xl z-auto mx-auto bg-gray-900 rounded-2xl shadow-2xl p-8"
-            overlayClassName="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
+            className="relative w-full max-w-2xl mx-auto bg-gray-800 rounded-2xl shadow-2xl p-8"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center"
           >
-            <h2 className="text-3xl mb-6 text-white font-extrabold">
+            <h2 className="text-4xl mb-6 text-white font-bold text-center">
               Select Students for Admit Card Printing
             </h2>
-            <div className="flex flex-col space-y-4">
+            <div className="max-h-96 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-800">
               {students.map((student) => (
-                <div key={student.id} className="flex items-center">
+                <div
+                  key={student.id}
+                  className="flex items-center p-2 rounded hover:bg-gray-700 transition-colors duration-200"
+                >
                   <input
                     type="checkbox"
                     checked={selectedStudents.includes(student.id)}
                     onChange={() => handleStudentCheckboxChange(student.id)}
-                    className="mr-4 h-6 w-6 text-blue-500 bg-gray-800 border-gray-700 rounded focus:ring-blue-500"
+                    className="h-5 w-5 text-blue-500 bg-gray-900 border-gray-600 rounded focus:ring-blue-500"
                   />
-                  <label className="text-lg text-gray-200">
+                  <label className="ml-4 text-lg text-gray-200">
                     {student.name}
                   </label>
                 </div>
@@ -304,13 +307,13 @@ const ViewExaminationSchedule = () => {
             <div className="flex justify-end mt-8 space-x-4">
               <button
                 onClick={handlePrintAdmitCards}
-                className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3 px-6 rounded-full hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-lg transform hover:scale-105"
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-8 rounded-full hover:from-blue-500 hover:to-indigo-500 transition-all duration-300 shadow-lg transform hover:scale-105"
               >
                 Print Selected
               </button>
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="bg-gradient-to-r from-red-600 to-pink-700 text-white py-3 px-6 rounded-full hover:from-red-700 hover:to-pink-800 transition-all duration-300 shadow-lg transform hover:scale-105"
+                className="bg-gradient-to-r from-red-600 to-pink-600 text-white py-3 px-8 rounded-full hover:from-red-500 hover:to-pink-500 transition-all duration-300 shadow-lg transform hover:scale-105"
               >
                 Close
               </button>
@@ -326,10 +329,10 @@ const ViewExaminationSchedule = () => {
           </div>
         </div>
       )}
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };
 
 export default ViewExaminationSchedule;
-// 
+//
