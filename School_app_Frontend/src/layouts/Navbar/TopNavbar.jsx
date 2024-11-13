@@ -19,42 +19,29 @@ function classNames(...classes) {
 const TopNavbar = ({ isCollapsed }) => {
   const { logout, name, userRole, authToken, schoolId } = useAuth();
   const navigate = useNavigate();
-  const [schoolName, setSchoolName] = useState("");
+  const [schoolName, setSchoolName] = useState("Your School Name Here");
   useEffect(() => {
     const fetchSchoolName = async () => {
-      if (schoolId) {
-        try {
-          const response = await axios.post(
-            `${import.meta.env.VITE_BACKEND_URL}/api/school-name-byschoolcode`,
-            {
-              schoolCode: schoolId,
-            }
-          );
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/get-school/${
+            import.meta.env.VITE_SchoolId
+          }`
+        );
+
+        if (response?.data?.data?.name) {
           setSchoolName(response.data.data.name);
-        } catch (error) {
-          console.error("Error fetching school name:", error);
-          toast.error("Error fetching school name.");
+        } else {
+          throw new Error("School name not found in response");
         }
-      } else if (import.meta.env.VITE_SchoolId) {
-        try {
-          const response = await axios.get(
-            `${import.meta.env.VITE_BACKEND_URL}/api/get-school/${
-              import.meta.env.VITE_SchoolId
-            }`
-          );
-          setSchoolName(response.data.data.name);
-        } catch (error) {
-          console.error("Error fetching school name:", error);
-          toast.error("Error fetching school name.");
-        }
-      }
-      else{
+      } catch (error) {
+        console.error("Error fetching school name:", error);
         toast.error("Unable to fetch school name.");
       }
     };
 
     fetchSchoolName();
-  }, [schoolId]);
+  }, []);
 
   const navigation = [{ name: schoolName, href: "#", current: false }];
 
@@ -264,3 +251,4 @@ const TopNavbar = ({ isCollapsed }) => {
 };
 
 export default TopNavbar;
+// kjkj
