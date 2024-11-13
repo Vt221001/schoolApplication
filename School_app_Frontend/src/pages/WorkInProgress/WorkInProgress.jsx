@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaTools } from 'react-icons/fa';
+import React from "react";
+import { FaTools } from "react-icons/fa";
 
 const WorkInProgress = () => {
   return (
@@ -18,11 +18,14 @@ const WorkInProgress = () => {
       </div>
 
       {/* Heading with Pulse Animation */}
-      <h1 className="text-5xl font-bold mt-8 animate-pulse text-[#7376f0]">Page Under Construction</h1>
+      <h1 className="text-5xl font-bold mt-8 animate-pulse text-[#7376f0]">
+        Page Under Construction
+      </h1>
 
       {/* Subtext */}
       <p className="text-2xl mt-4 max-w-lg text-center">
-        We're currently working hard to build something amazing! Please check back soon.
+        We're currently working hard to build something amazing! Please check
+        back soon.
       </p>
     </div>
   );

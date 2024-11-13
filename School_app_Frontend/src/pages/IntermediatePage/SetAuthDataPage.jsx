@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../context/AuthProvider";
-import PyramidLoader from "../common/Loader/PyramidLoader";
+import { useAuth } from "../../context/AuthProvider";
+import PyramidLoader from "../../common/Loader/PyramidLoader";
 import axios from "axios";
 import { toast } from "react-toastify";
-import AdminDashboard from "../pages/Dashboard/AdminDashboard";
+import AdminDashboard from "../Dashboard/AdminDashboard";
 
 const SetAuthDataPage = () => {
   const navigate = useNavigate();

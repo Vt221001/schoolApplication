@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import FormSection from "../components/Form/FormSection";
-import SearchableSelect from "../components/Form/Select";
-import TimeInput from "../common/TimeInput/TimeInput";
-import FormButton from "../components/Form/FormButton";
-import DynamicFilterBar2 from "../common/FilterBar/SelectDropDownFilterTimeTable";
+import FormSection from "../../components/Form/FormSection";
+import SearchableSelect from "../../components/Form/Select";
+import TimeInput from "../../common/TimeInput/TimeInput";
+import FormButton from "../../components/Form/FormButton";
+import DynamicFilterBar2 from "../../common/FilterBar/SelectDropDownFilterTimeTable";
 import { toast, ToastContainer } from "react-toastify";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";

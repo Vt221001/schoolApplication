@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import LoginForm from "../components/LoginPage/LoginForm";
-import { useAuth } from "../context/AuthProvider";
+import LoginForm from "../../components/LoginPage/LoginForm";
+import { useAuth } from "../../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import PyramidLoader from "../common/Loader/PyramidLoader";
+import PyramidLoader from "../../common/Loader/PyramidLoader";
 import { ToastContainer, toast } from "react-toastify";
 
 const LoginPage = () => {

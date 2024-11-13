@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Input from "../components/Form/Input";
-import FormButton from "../components/Form/FormButton";
-import { deleteAPI, getAPI } from "../utility/api/apiCall";
+import Input from "../../components/Form/Input";
+import FormButton from "../../components/Form/FormButton";
+import { deleteAPI, getAPI } from "../../utility/api/apiCall";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";

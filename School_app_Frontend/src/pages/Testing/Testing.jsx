@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import TrafficChart from "../common/Charts/TrafficChart";
-import BarChart from "../common/Charts/BarChart";
-import DataTable from "../common/Datatables/Datatable";
-import PyramidLoader from "../common/Loader/PyramidLoader";
-import RadialBarChart from "../common/Charts/RadialBarChart";
-import SmalldataBlock from "../common/DataBlock/SmalldataBlock";
-import DisplayingStudentHomework from "../common/DataBlock/DisplayingStudentHomework";
+import TrafficChart from "../../common/Charts/TrafficChart";
+import BarChart from "../../common/Charts/BarChart";
+import DataTable from "../../common/Datatables/Datatable";
+import PyramidLoader from "../../common/Loader/PyramidLoader";
+import RadialBarChart from "../../common/Charts/RadialBarChart";
+import SmalldataBlock from "../../common/DataBlock/SmalldataBlock";
+import DisplayingStudentHomework from "../../common/DataBlock/DisplayingStudentHomework";
 
 const Testing = () => {
   const trafficChartData = {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import AttendenceSearchBar from "../common/SearchBar/AttendenceSearchBar";
-import Datatable from "../common/Datatables/Datatable";
-import { getAPI } from "../utility/api/apiCall";
+import AttendenceSearchBar from "../../common/SearchBar/AttendenceSearchBar";
+import Datatable from "../../common/Datatables/Datatable";
+import { getAPI } from "../../utility/api/apiCall";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";

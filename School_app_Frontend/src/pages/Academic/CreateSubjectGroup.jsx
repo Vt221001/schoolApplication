@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import FormSection from "../components/Form/FormSection";
-import Input from "../components/Form/Input";
-import Select from "../components/Form/Select";
-import FormButton from "../components/Form/FormButton";
-import { getAPI } from "../utility/api/apiCall";
+import FormSection from "../../components/Form/FormSection";
+import Input from "../../components/Form/Input";
+import Select from "../../components/Form/Select";
+import FormButton from "../../components/Form/FormButton";
+import { getAPI } from "../../utility/api/apiCall";
 import { toast, ToastContainer } from "react-toastify";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import axios from "axios";
-import ConfirmationModal from "../common/ConfirmationModal/ConfirmationModal"; // Import the ConfirmationModal
+import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal"; // Import the ConfirmationModal
 
 const CreateSubjectGroup = () => {
   const [formData, setFormData] = useState({

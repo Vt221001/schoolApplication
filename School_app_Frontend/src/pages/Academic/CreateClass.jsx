@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import FormSection from "../components/Form/FormSection";
-import Input from "../components/Form/Input";
-import Select from "../components/Form/Select";
-import FormButton from "../components/Form/FormButton";
-import CheckboxGroup from "../components/Form/CheckboxGroup";
-import { getAPI } from "../utility/api/apiCall";
+import FormSection from "../../components/Form/FormSection";
+import Input from "../../components/Form/Input";
+import Select from "../../components/Form/Select";
+import FormButton from "../../components/Form/FormButton";
+import CheckboxGroup from "../../components/Form/CheckboxGroup";
+import { getAPI } from "../../utility/api/apiCall";
 import axios from "axios";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast, ToastContainer } from "react-toastify";
-import ConfirmationModal from "../common/ConfirmationModal/ConfirmationModal";
+import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal";
 const CreateClass = ({ onCreate }) => {
   const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
   const [className, setClassName] = useState("");
