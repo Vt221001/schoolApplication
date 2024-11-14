@@ -149,26 +149,30 @@ const FeesInstallment = () => {
     }
   };
 
- // Handle delete installment
-const handleDelete = async (index) => {
+  // Handle delete installment
+  const handleDelete = async (index) => {
     const installment = installments[index];
     const payload = {
       classId: installment.classId,
       installmentId: installment._id,
     };
-  
+
     try {
-      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/delete-installment`, {
-        data: payload, // Add payload data to delete request
-      });
-      toast.success('Installment deleted successfully!');
+      const deleteIn = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_URL}/api/delete-installment`,
+        {
+          data: payload, // Add payload data to delete request
+        }
+      );
+
+      console.log(deleteIn);
+      toast.success("Installment deleted successfully!");
       fetchAllInstallments(); // Refetch all installments to update the data
     } catch (error) {
-      console.error('Error deleting installment:', error);
-      toast.error('Failed to delete installment');
+      console.error("Error deleting installment:", error);
+      toast.error("Failed to delete installment");
     }
   };
-  
 
   // Handle update installment
   const handleUpdate = async (index) => {
