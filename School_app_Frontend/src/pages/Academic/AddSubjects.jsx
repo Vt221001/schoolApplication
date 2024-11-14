@@ -1,11 +1,11 @@
 // AddSubjects.jsx
 import React, { useEffect, useState } from "react";
-import { getAPI } from "../utility/api/apiCall";
+import { getAPI } from "../../utility/api/apiCall";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ConfirmationModal from "../common/ConfirmationModal/ConfirmationModal"; // Import the ConfirmationModal
+import ConfirmationModal from "../../common/ConfirmationModal/ConfirmationModal"; // Import the ConfirmationModal
 
 const AddSubjects = () => {
   const [subjectName, setSubjectName] = useState("");

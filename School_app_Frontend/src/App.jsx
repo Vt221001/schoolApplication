@@ -28,13 +28,12 @@ import TeacherAdd from "./pages/Teacher/TeacherAdd.jsx";
 import AddMarks from "./pages/Examination/AddMarks.jsx";
 import CreateSection from "./pages/Academic/CreateSection.jsx";
 import CreateClass from "./pages/Academic/CreateClass.jsx";
-import AddSubjects from "./pages/AddSubjects.jsx";
 import CreateSubjectGroup from "./pages/Academic/CreateSubjectGroup.jsx";
 import ViewNotice from "./pages/Notice/ViewNotice.jsx";
 import ExamGrpup from "./pages/Examination/ExamGrpup.jsx";
 import ExamType from "./pages/Examination/ExamType.jsx";
 import ExaminationSchedule from "./pages/Examination/ExaminationSchedule.jsx";
-import ClassTimetable from "./pages/ClassTimetable.jsx";
+import ClassTimetable from "./pages/Academic/ClassTimetable.jsx";
 import TeacherTimetable from "./pages/Teacher/TeacherTimetable.jsx";
 import CreateTimetabel from "./pages/Academic/CreateTimetabel.jsx";
 import AssingTeacher from "./pages/Teacher/AssingTeacher.jsx";
@@ -43,7 +42,7 @@ import ViewMarks from "./pages/Examination/ViewMarks.jsx";
 import ViewExaminationScheduleForStudentAndParent from "./pages/Examination/ViewExaminationScheduleForStudentAndParent.jsx";
 import StaffAdd from "./pages/Staff/StaffAdd.jsx";
 import StaffInfo from "./pages/Staff/StaffInfo.jsx";
-import CommonClassTimeTable from "./pages/CommonClassTimeTable.jsx";
+import CommonClassTimeTable from "./pages/Academic/CommonClassTimeTable.jsx";
 import StudentsResults from "./pages/Results/StudentsResults.jsx";
 import ShowStudentResult from "./pages/Results/ShowStudentResult.jsx";
 import StudentAttendance from "./pages/Student/StudentAttendance.jsx";
@@ -52,8 +51,8 @@ import StaffAttendance from "./pages/Staff/StaffAttendance.jsx";
 import StudentAdmitCard from "./pages/Print/StudentAdmitCard.jsx";
 import AdmitCardPrint from "./pages/Print/AdmitCardPrint.jsx";
 import ResultPrint from "./pages/Print/ResultPrint.jsx";
-import ContactDetails from "./pages/ContactDetails.jsx";
-import ViewContact from "./pages/ViewContact.jsx";
+import ContactDetails from "./pages/Settings/ContactDetails.jsx";
+import ViewContact from "./pages/Settings/ViewContact.jsx";
 import AddHomeWork from "./pages/HomeWork/AddHomeWork.jsx";
 import ViewHomeWork from "./pages/HomeWork/ViewHomeWork.jsx";
 import ManageLessonPlan from "./pages/LessonPlan/ManageLessonPlan.jsx";
@@ -77,6 +76,7 @@ import StudentAndParentExcelUpload from "./pages/UploadFiles/StudentAndParentExc
 import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
 import SetAuthDataPage from "./pages/IntermediatePage/SetAuthDataPage.jsx";
 import PyramidLoader from "./common/Loader/PyramidLoader.jsx";
+import AddSubjects from "./pages/Academic/AddSubjects.jsx";
 
 const App = () => {
   const { userRole, authToken, loading } = useAuth();
@@ -358,9 +358,10 @@ const App = () => {
             element={
               <RoleBasedAccess allowedRoles={["Admin"]}>
                 {" "}
-                <CreateSection />
+                <CreateSection  />
               </RoleBasedAccess>
-            }
+            }  
+            
           />
           <Route
             path="create-class"

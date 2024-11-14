@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import DynamicFilterBar from "../common/FilterBar/DynamicFilterBar";
+import DynamicFilterBar from "../../common/FilterBar/DynamicFilterBar";
 import { LuTimer } from "react-icons/lu";
 import { MdSubject } from "react-icons/md";
-import { getAPI } from "../utility/api/apiCall";
+import { getAPI } from "../../utility/api/apiCall";
 import { GiTeacher } from "react-icons/gi";
 import axios from "axios";
 import { useReactToPrint } from "react-to-print";
-import FormButton from "../components/Form/FormButton";
-import TimeTablePrintClasswise from "./Print/TimeTablePrintClasswise";
+import FormButton from "../../components/Form/FormButton";
+import TimeTablePrintClasswise from "../Print/TimeTablePrintClasswise";
 
 const ClassTimetable = () => {
   const [classes, setClasses] = useState([]);

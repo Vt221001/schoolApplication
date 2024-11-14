@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ContactCard from "../components/Form/ContactCard";
-import { getAPI } from "../utility/api/apiCall";
+import ContactCard from "../../components/Form/ContactCard";
+import { getAPI } from "../../utility/api/apiCall";
 
 const ViewContact = () => {
   const [contacts, setContacts] = useState([]);
