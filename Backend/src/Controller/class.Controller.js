@@ -285,6 +285,58 @@ export const getAllStudentsByclassId = wrapAsync(async (req, res) => {
     return res.status(200).json(new ApiResponse(200, students));
 });
 
+export const getAllStudentsByclassIdAndSectionId = wrapAsync(
+    async (req, res) => {
+        const { classId, sectionId } = req.body;
+        const students = await Student.find({
+            currentClass: classId,
+            currentSection: sectionId,
+        });
+
+        if (students.length === 0) {
+            return res
+                .status(404)
+                .json(new ApiResponse(404, null, "No students found"));
+        }
+
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    students,
+                    "Students retrieved successfully"
+                )
+            );
+    }
+);
+
+export const getAllStudentsByClassIdSectionIdAndSessionId = wrapAsync(
+    async (req, res) => {
+        const { classId, sectionId, sessionId } = req.body;
+        const students = await Student.find({
+            currentClass: classId,
+            currentSection: sectionId,
+            currentSession: sessionId,
+        });
+
+        if (students.length === 0) {
+            return res
+                .status(404)
+                .json(new ApiResponse(404, null, "No students found"));
+        }
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    students,
+                    "Students retrieved successfully"
+                )
+            );
+    }
+);
+
 export const getAllStudentsByClassIdtoshownameandroll = wrapAsync(
     async (req, res) => {
         const { classId } = req.params;
