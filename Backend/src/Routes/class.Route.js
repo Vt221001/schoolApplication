@@ -6,6 +6,8 @@ import {
     getAllClasses,
     getAllClassesWithSections,
     getAllStudentsByclassId,
+    getAllStudentsByclassIdAndSectionId,
+    getAllStudentsByClassIdSectionIdAndSessionId,
     getAllStudentsByClassIdtoshownameandroll,
     getClassById,
     updateClass,
@@ -24,6 +26,14 @@ router.get("/getallstudents/:classId", getAllStudentsByclassId);
 router.get(
     "/getallstudentsinfo/:classId",
     getAllStudentsByClassIdtoshownameandroll
+);
+router.post(
+    "/get-student-by-classandsection",
+    getAllStudentsByclassIdAndSectionId
+);
+router.post(
+    "/get-student-by-classid-sectionid-sessionid",
+    getAllStudentsByClassIdSectionIdAndSessionId
 );
 
 export { router as classRoute };

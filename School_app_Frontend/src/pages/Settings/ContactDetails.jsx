@@ -55,11 +55,17 @@ const ContactDetails = () => {
     try {
       if (isEditing) {
         await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/update-contact/${contacts[editIndex]._id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/update-contact/${
+            contacts[editIndex]._id
+          }`,
           formData
         ); // Update endpoint
         const updatedContacts = [...contacts];
-        updatedContacts[editIndex] = formData;
+        // updatedContacts[editIndex] = formData;
+        updatedContacts[editIndex] = {
+          ...formData,
+          _id: contacts[editIndex]._id,
+        };
         setContacts(updatedContacts);
         toast.success("Contact information updated successfully!");
       } else {
@@ -67,7 +73,9 @@ const ContactDetails = () => {
           `${import.meta.env.VITE_BACKEND_URL}/api/add-contact`,
           formData
         );
-        setContacts([...contacts, response.data]);
+
+        // setContacts([...contacts, response.data]);
+        setContacts((prevContacts) => [...prevContacts, response.data.data]);
         toast.success("Contact information added successfully!");
       }
 
@@ -87,6 +95,10 @@ const ContactDetails = () => {
     }
   };
 
+  useEffect(() => {
+    console.log("Contacts updated:", contacts);
+  }, [contacts]);
+
   const handleEdit = (index) => {
     setFormData(contacts[index]);
     setIsEditing(true);
@@ -104,7 +116,9 @@ const ContactDetails = () => {
     setLoading(true);
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/delete-contact/${contacts[deleteIndex]._id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/delete-contact/${
+          contacts[deleteIndex]._id
+        }`
       );
       const updatedContacts = contacts.filter((_, i) => i !== deleteIndex);
       setContacts(updatedContacts);

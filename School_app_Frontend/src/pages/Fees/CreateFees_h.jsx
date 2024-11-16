@@ -122,10 +122,10 @@ const FeeManagement = () => {
         feeGroupId,
         class: classId,
         fees: {
-          tuitionFee,
-          admissionFee,
-          annualFee,
-          otherFee,
+          tuitionFee: Number(tuitionFee),
+          admissionFee: Number(admissionFee),
+          annualFee: Number(annualFee),
+          otherFee: Number(otherFee),
         },
       })
     );
@@ -143,7 +143,9 @@ const FeeManagement = () => {
 
       if (response.data && response.data.success) {
         toast.success(
-          isUpdateMode ? "Fees updated successfully!" : "Fees created successfully!"
+          isUpdateMode
+            ? "Fees updated successfully!"
+            : "Fees created successfully!"
         );
         setIsUpdateMode(false);
       } else {

@@ -25,8 +25,8 @@ const Notice = () => {
   };
 
   const handleSubmit = async (e) => {
-    // const schoolId = import.meta.env.VITE_SchoolId;
-    const schoolId = localStorage.getItem("schoolId");
+    const schoolId = import.meta.env.VITE_SchoolId;
+    // const schoolId = localStorage.getItem("schoolId");
     if (!schoolId) {
       toast.error("School ID not found. Please login again.");
       return;

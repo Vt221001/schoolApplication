@@ -19,7 +19,7 @@ const getRefreshEndpoint = (role) => {
     case "Parent":
       return `${import.meta.env.VITE_BACKEND_URL}/api/refresh-token-parent`;
     default:
-      return "https://school-application-three.vercel.app/api/refresh-token";
+      return `${import.meta.env.VITE_BACKEND_URL}/api/refresh-token`;
   }
 };
 
@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [schoolId, setSchoolId] = useState();
-  
+
   useEffect(() => {
     const handleTokenRefresh = async () => {
       if (authToken) {
@@ -107,12 +107,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (
-    authToken,
-    refreshToken,
-    user,
-    schoolCode,
-  ) => {
+  const login = async (authToken, refreshToken, user, schoolCode) => {
     setLoading(true); // Show loader during login
     setAuthToken(authToken);
     setRefreshToken(refreshToken);
@@ -141,7 +136,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("name", userName);
     localStorage.setItem("schoolId", schoolId);
     localStorage.setItem("frontendUrl", frontendUrl);
-    
+
     setLoading(false); // Hide loader after login
   };
 

@@ -34,8 +34,11 @@ const AddSubjects = () => {
   };
 
   const handleSubmit = async (e) => {
-    // const schoolId = import.meta.env.VITE_SchoolId;
-    const schoolId = localStorage.getItem("schoolId");
+    const schoolId = import.meta.env.VITE_SchoolId;
+    console.log("schoolId", schoolId);
+    // const schoolId =
+    //   localStorage.getItem("schoolId") || `${import.meta.env.VITE_SchoolId}`;
+      // console.log("schoolId", schoolId);
     if (!schoolId) {
       toast.error("School ID not found. Please login again.");
       return;
@@ -45,7 +48,9 @@ const AddSubjects = () => {
       if (editingSubject) {
         const updatedSubject = { name: subjectName, code: subjectCode };
         await axios.put(
-          `${import.meta.env.VITE_BACKEND_URL}/api/subject-update/${editingSubject._id}`,
+          `${import.meta.env.VITE_BACKEND_URL}/api/subject-update/${
+            editingSubject._id
+          }`,
           { name: subjectName, code: subjectCode }
         );
         setSubjects((prev) =>
@@ -93,9 +98,13 @@ const AddSubjects = () => {
     if (!subjectToDelete) return;
     try {
       await axios.delete(
-        `${import.meta.env.VITE_BACKEND_URL}/api/subject-delete/${subjectToDelete._id}`
+        `${import.meta.env.VITE_BACKEND_URL}/api/subject-delete/${
+          subjectToDelete._id
+        }`
       );
-      setSubjects(subjects.filter((subject) => subject._id !== subjectToDelete._id));
+      setSubjects(
+        subjects.filter((subject) => subject._id !== subjectToDelete._id)
+      );
       toast.success("Subject deleted successfully");
     } catch (error) {
       console.error("Error deleting subject", error);
@@ -122,7 +131,10 @@ const AddSubjects = () => {
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label htmlFor="subjectName" className="block text-lg font-medium">
+              <label
+                htmlFor="subjectName"
+                className="block text-lg font-medium"
+              >
                 Subject Name
               </label>
               <input
@@ -135,7 +147,10 @@ const AddSubjects = () => {
               />
             </div>
             <div className="mb-4">
-              <label htmlFor="subjectCode" className="block text-lg font-medium">
+              <label
+                htmlFor="subjectCode"
+                className="block text-lg font-medium"
+              >
                 Subject Code
               </label>
               <input
@@ -208,4 +223,4 @@ const AddSubjects = () => {
 };
 
 export default AddSubjects;
-// ehlo 
+// ehlo

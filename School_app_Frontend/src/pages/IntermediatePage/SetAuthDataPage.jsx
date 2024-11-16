@@ -28,6 +28,7 @@ const SetAuthDataPage = () => {
           frontendUrl,
         } = userData;
 
+        
         axios
           .post(`${import.meta.env.VITE_BACKEND_URL}/api/verify-admin`, {
             accessToken: authToken,
