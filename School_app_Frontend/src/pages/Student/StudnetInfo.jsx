@@ -30,6 +30,8 @@ const StudentInfo = () => {
   const [siblingsData, setSiblingsData] = useState([]);
   const [siblingGroupId, setSiblingGroupId] = useState([]);
   const [isSiblingsModalOpen, setIsSiblingsModalOpen] = useState(false);
+  const [filterMessage, setFilterMessage] = useState("");
+
   const navigate = useNavigate();
 
   const fetchDropdownData = async () => {
@@ -44,101 +46,150 @@ const StudentInfo = () => {
 
   useEffect(() => {
     fetchDropdownData();
-    fetchData();
+    // handleFilter();
   }, []);
 
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await getAPI("getAllStudents", {}, setAllStudentData);
+  // const fetchData = async () => {
+  //   setLoading(true);
+  //   try {
+  //     const response = await getAPI("getAllStudents", {}, setAllStudentData);
 
-      if (response.data && Array.isArray(response.data)) {
-        const updatedResponse = await Promise.all(
-          response.data.map(async (student) => {
-            try {
-              const { data } = await axios.get(
-                `${
-                  import.meta.env.VITE_BACKEND_URL
-                }/api/get-student-attendance-summary/${student._id}`
-              );
+  //     if (response.data && Array.isArray(response.data)) {
+  //       const updatedResponse = await Promise.all(
+  //         response.data.map(async (student) => {
+  //           try {
+  //             const { data } = await axios.get(
+  //               `${
+  //                 import.meta.env.VITE_BACKEND_URL
+  //               }/api/get-student-attendance-summary/${student._id}`
+  //             );
 
-              const attendancePercentage = data?.data?.percentage;
-              return {
-                ...student,
-                attendancePercentage: attendancePercentage,
-                grade: "A", // Example grade
-              };
-            } catch (error) {
-              console.error(
-                `Error fetching attendance for student ${student._id}:`,
-                error
-              );
-              return {
-                ...student,
-                attendancePercentage: 0,
-                grade: "A",
-              };
-            }
-          })
-        );
+  //             const attendancePercentage = data?.data?.percentage;
+  //             return {
+  //               ...student,
+  //               attendancePercentage: attendancePercentage,
+  //               grade: "A", // Example grade
+  //             };
+  //           } catch (error) {
+  //             console.error(
+  //               `Error fetching attendance for student ${student._id}:`,
+  //               error
+  //             );
+  //             return {
+  //               ...student,
+  //               attendancePercentage: 0,
+  //               grade: "A",
+  //             };
+  //           }
+  //         })
+  //       );
 
-        setAllStudentData(updatedResponse);
-        setFilteredStudentData(updatedResponse);
-      }
-    } catch (error) {
-      console.error("Error fetching student data:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //       setAllStudentData(updatedResponse);
+  //       setFilteredStudentData(updatedResponse);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching student data:", error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const clearFilters = () => {
     setSelectedClass(null);
     setSelectedSection(null);
     setSelectedSession(null);
     setSearchText("");
-    setFilteredStudentData(allStudentData); // Reset the filtered data to all students
+    setFilteredStudentData(allStudentData);
     fetchDropdownData();
   };
 
-  const handleFilter = () => {
-    let filteredData = allStudentData;
+  const handleFilter = async () => {
+    setLoading(true);
 
-    if (selectedClass) {
-      filteredData = filteredData.filter(
-        (student) => student.currentClass._id === selectedClass._id
-      );
-    }
+    try {
+      let response;
 
-    if (selectedSection) {
-      filteredData = filteredData.filter(
-        (student) => student.currentSection._id === selectedSection._id
-      );
-    }
-
-    if (selectedSession) {
-      filteredData = filteredData.filter(
-        (student) => student.currentSession._id === selectedSession._id
-      );
-    }
-
-    if (searchText) {
-      filteredData = filteredData.filter((student) => {
-        const fullName =
-          `${student.firstName} ${student.lastName}`.toLowerCase();
-        return (
-          fullName.includes(searchText.toLowerCase()) ||
-          student.rollNumber.toLowerCase().includes(searchText.toLowerCase())
+      if (selectedClass && selectedSection && selectedSession) {
+        response = await axios.post(
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/get-student-by-classid-sectionid-sessionid`,
+          {
+            classId: selectedClass._id,
+            sectionId: selectedSection._id,
+            sessionId: selectedSession._id,
+          }
         );
-      });
-    }
+      } else if (selectedClass && selectedSection) {
+        response = await axios.post(
+          `${
+            import.meta.env.VITE_BACKEND_URL
+          }/api/get-student-by-classandsection`,
+          {
+            classId: selectedClass._id,
+            sectionId: selectedSection._id,
+          }
+        );
+      } else if (selectedClass) {
+        response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/api/getallstudents/${
+            selectedClass._id
+          }`
+        );
+      } else {
+        setFilteredStudentData([]);
+        setFilterMessage("Please select at least one filter to view students.");
+        setLoading(false);
+        return;
+      }
 
-    setFilteredStudentData(filteredData);
+      if (
+        response?.data.data &&
+        Array.isArray(response.data.data) &&
+        response.data.data.length > 0
+      ) {
+        setAllStudentData(response.data.data);
+        setFilteredStudentData(response.data.data);
+        setFilterMessage("");
+        toast.success("Students loaded successfully.");
+      } else {
+        toast.info("No students found with the selected filters.");
+        setFilterMessage("No students found with the selected filters.");
+      }
+    } catch (error) {
+      console.error("Error fetching filtered student data:", error);
+
+      if (error.response) {
+        if (error.response.status === 404) {
+          toast.error("No students found with the selected filters.");
+          setFilterMessage("No students found with the selected filters.");
+        } else {
+          toast.error(`An error occurred: ${error.response.statusText}`);
+          setFilterMessage("An error occurred while fetching student data.");
+        }
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+        toast.error("No response from the server. Please try again later.");
+        setFilterMessage("Unable to connect to the server.");
+      } else {
+        console.error("Error setting up request:", error.message);
+        toast.error("An unexpected error occurred.");
+        setFilterMessage("An unexpected error occurred while fetching data.");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleSearch = (text) => {
     setSearchText(text);
-    handleFilter();
+    const filteredData = allStudentData.filter(
+      (student) =>
+        student.firstName.toLowerCase().includes(text.toLowerCase()) ||
+        student.lastName.toLowerCase().includes(text.toLowerCase()) ||
+        student.rollNumber.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredStudentData(filteredData);
   };
 
   const handleDetailsSelect = (type) => {
@@ -171,41 +222,6 @@ const StudentInfo = () => {
       header: "Section",
       accessor: (rowData) => rowData?.currentSection?.name || "N/A",
     },
-    {
-      header: "Attendance Percentage",
-      accessor: "attendancePercentage",
-      render: (rowData) => {
-        const attendanceValue = parseFloat(rowData.attendancePercentage);
-        return (
-          <div className="flex items-center">
-            <span className="mr-2">{attendanceValue}%</span>
-            <div className="relative w-full">
-              <div className="overflow-hidden h-2 text-xs flex rounded bg-gray-700">
-                <div
-                  style={{
-                    width: `${attendanceValue}%`,
-                    backgroundColor:
-                      attendanceValue >= 90
-                        ? "#00e676"
-                        : attendanceValue >= 80
-                        ? "#66bb6a"
-                        : attendanceValue >= 70
-                        ? "#ffeb3b"
-                        : attendanceValue >= 60
-                        ? "#ffa726"
-                        : attendanceValue >= 50
-                        ? "#ff7043"
-                        : "#f44336",
-                  }}
-                  className="h-2 shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center"
-                />
-              </div>
-            </div>
-          </div>
-        );
-      },
-    },
-    { header: "Grade", accessor: "grade" },
   ];
 
   const handleEdit = (studentData) => {
@@ -221,6 +237,10 @@ const StudentInfo = () => {
     setStudentToDelete(studentData);
     setIsModalOpen(true);
   };
+
+  useEffect(() => {
+    handleFilter();
+  }, [selectedClass, selectedSection, selectedSession]);
 
   const handleCustomAction = (studentData) => {
     setCurrentStudentId(studentData._id);
@@ -297,13 +317,10 @@ const StudentInfo = () => {
           if (type === "class") setSelectedClass(value);
           if (type === "section") setSelectedSection(value);
           if (type === "session") setSelectedSession(value);
-          handleFilter();
+          // handleFilter();
         }}
-        onSearch={(text) => {
-          setSearchText(text);
-          handleFilter();
-        }}
-        onClearFilters={clearFilters} // Pass clearFilters to SearchBar
+        onSearch={handleSearch}
+        onClearFilters={clearFilters}
       />
 
       {loading ? (
@@ -355,6 +372,13 @@ const StudentInfo = () => {
         siblingGroupId={siblingGroupId}
         onSiblingRemoved={handleSiblingRemoved}
       />
+
+      {filterMessage && (
+        <div className="text-center text-red-500 text-lg mt-4">
+          {filterMessage}
+        </div>
+      )}
+
       <ToastContainer />
     </div>
   );

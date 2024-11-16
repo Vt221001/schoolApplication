@@ -70,7 +70,7 @@ const columns = [
 
 const Attendence = () => {
   const [studentData, setStudentData] = useState([]);
-  const [filteredStudentData, setFilteredStudentData] = useState([]); // Use this for displaying filtered data
+  const [filteredStudentData, setFilteredStudentData] = useState([]);
   const [studentAttendance, setStudentAttendance] = useState([]);
   const [attendanceStatus, setAttendanceStatus] = useState({});
   const [classItems, setClassItems] = useState([]);
@@ -132,7 +132,6 @@ const Attendence = () => {
     setFilteredStudentData(filteredData);
   };
 
-  // Trigger filter whenever search text changes
   const handleSearch = (searchText) => {
     setSearchText(searchText);
     handleFilter({});

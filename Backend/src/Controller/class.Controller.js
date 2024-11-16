@@ -281,7 +281,18 @@ export const getAllClassesWithSections = wrapAsync(async (req, res) => {
 
 export const getAllStudentsByclassId = wrapAsync(async (req, res) => {
     const { classId } = req.params;
-    const students = await Student.find({ currentClass: classId });
+    const students = await Student.find({ currentClass: classId })
+        .populate("currentClass")
+        .populate("currentSection")
+        .populate("currentSession")
+        .populate("parent")
+        .populate({
+            path: "StudentAttendance",
+            model: "StudentAttendance",
+        })
+        .populate("studentHistory")
+        .lean();
+
     return res.status(200).json(new ApiResponse(200, students));
 });
 
@@ -291,7 +302,17 @@ export const getAllStudentsByclassIdAndSectionId = wrapAsync(
         const students = await Student.find({
             currentClass: classId,
             currentSection: sectionId,
-        });
+        })
+            .populate("currentClass")
+            .populate("currentSection")
+            .populate("currentSession")
+            .populate("parent")
+            .populate({
+                path: "StudentAttendance",
+                model: "StudentAttendance",
+            })
+            .populate("studentHistory")
+            .lean();
 
         if (students.length === 0) {
             return res
