@@ -8,7 +8,7 @@ import DetailsSelectionModal from "../../common/ConfirmationModal/DetailsSelecti
 import StudentSearchPopup from "./StudentPopup";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
-  
+
 const StudentInfo = () => {
   const [allStudentData, setAllStudentData] = useState([]);
   const [filteredStudentData, setFilteredStudentData] = useState([]);
@@ -16,8 +16,8 @@ const StudentInfo = () => {
   const [sectionItems, setSectionItems] = useState([]);
   const [sessionItems, setSessionItems] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
-  const [selectedSection, setSelectedSection] = useState(null); // Define selectedSection state
-  const [selectedSession, setSelectedSession] = useState(null); // Define selectedSession state
+  const [selectedSection, setSelectedSection] = useState(null);
+  const [selectedSession, setSelectedSession] = useState(null);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);

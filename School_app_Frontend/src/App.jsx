@@ -77,6 +77,8 @@ import WorkInProgress from "./pages/WorkInProgress/WorkInProgress.jsx";
 import SetAuthDataPage from "./pages/IntermediatePage/SetAuthDataPage.jsx";
 import PyramidLoader from "./common/Loader/PyramidLoader.jsx";
 import AddSubjects from "./pages/Academic/AddSubjects.jsx";
+import StudentAddBlank from "./pages/SchoolForm/StudentAddBlank.jsx";
+import StudentAddFillForm from "./pages/SchoolForm/StudentAddFillForm.jsx";
 
 const App = () => {
   const { userRole, authToken, loading } = useAuth();
@@ -166,6 +168,7 @@ const App = () => {
               </RoleBasedAccess>
             }
           />
+
           <Route path="testing" element={<Testing />} />
           <Route
             path="student-admission/:studentId?"
@@ -201,6 +204,24 @@ const App = () => {
               </RoleBasedAccess>
             }
           />
+
+          <Route
+            path="student-blank-form"
+            element={
+              <RoleBasedAccess allowedRoles={["Admin"]}>
+                <StudentAddBlank />
+              </RoleBasedAccess>
+            }
+          />
+          <Route
+            path="student-fill-form"
+            element={
+              <RoleBasedAccess allowedRoles={["Admin"]}>
+                <StudentAddFillForm />
+              </RoleBasedAccess>
+            }
+          />
+
           <Route
             path="all-staffs"
             element={
@@ -358,10 +379,9 @@ const App = () => {
             element={
               <RoleBasedAccess allowedRoles={["Admin"]}>
                 {" "}
-                <CreateSection  />
+                <CreateSection />
               </RoleBasedAccess>
-            }  
-            
+            }
           />
           <Route
             path="create-class"

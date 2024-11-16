@@ -57,13 +57,13 @@ export const navigation = [
     children: [
       {
         name: "Student Blank Form",
-        to: "/school/student-information",
+        to: "/school/student-blank-form",
         icon: FaRegCircle,
         roles: ["Admin"],
       },
       {
-        name: "Student Admission",
-        to: "/school/student-admission",
+        name: "Student Fill Form",
+        to: "/school/student-fill-form",
         icon: FaRegCircle,
         roles: ["Admin", "Teacher", "Student"],
       },
