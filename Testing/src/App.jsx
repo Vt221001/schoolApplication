@@ -12,7 +12,6 @@ const App = () => {
   return (
     <Router>
       <div>
-        {/* Navigation Menu */}
         <nav>
           <ul>
             <li>
@@ -40,6 +39,6 @@ const App = () => {
       </div>
     </Router>
   );
-};
+ };
 
 export default App;
