@@ -49,6 +49,28 @@ export const navigation = [
     ],
   },
   {
+    name: "Form",
+    to: "#",
+    icon: FaUsers,
+    current: false,
+    roles: ["Admin"],
+    children: [
+      {
+        name: "Student Blank Form",
+        to: "/school/student-information",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+      {
+        name: "Student Admission",
+        to: "/school/student-admission",
+        icon: FaRegCircle,
+        roles: ["Admin", "Teacher", "Student"],
+      },
+    ],
+  },
+
+  {
     name: "Attendance",
     to: "#",
     icon: FaUserCheck,
@@ -485,5 +507,4 @@ export const navigation = [
       },
     ],
   },
-  
 ];
