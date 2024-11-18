@@ -79,6 +79,7 @@ import PyramidLoader from "./common/Loader/PyramidLoader.jsx";
 import AddSubjects from "./pages/Academic/AddSubjects.jsx";
 import StudentAddBlank from "./pages/SchoolForm/StudentAddBlank.jsx";
 import StudentAddFillForm from "./pages/SchoolForm/StudentAddFillForm.jsx";
+import StudentPreFilledFrom from "./pages/SchoolForm/StudentPreFilledFrom.jsx";
 
 const App = () => {
   const { userRole, authToken, loading } = useAuth();
@@ -218,6 +219,14 @@ const App = () => {
             element={
               <RoleBasedAccess allowedRoles={["Admin"]}>
                 <StudentAddFillForm />
+              </RoleBasedAccess>
+            }
+          />
+          <Route
+            path="student-pre-fill-form/:items"
+            element={
+              <RoleBasedAccess allowedRoles={["Admin"]}>
+                <StudentPreFilledFrom />
               </RoleBasedAccess>
             }
           />

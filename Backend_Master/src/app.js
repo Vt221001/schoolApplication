@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 
 // Welcome route
 app.get("/", (req, res) => {
-  res.send("Welcome to our School. Deployment is complete");
+  res.send("Welcome to our School. Deployment is complete  Master");
 });
 
 app.use("/api", masterRouter);

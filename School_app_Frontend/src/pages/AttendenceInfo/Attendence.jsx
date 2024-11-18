@@ -97,21 +97,18 @@ const Attendence = () => {
     let filteredData = studentData;
 
     if (type === "class" && value) {
-      // Apply class filter and update selectedClass
       setSelectedClass(value);
       filteredData = filteredData.filter(
         (student) => student.currentClass._id === value._id
       );
     } else if (type === "section" && value) {
-      // Apply both class and section filter if a class is selected
       if (selectedClass) {
         filteredData = filteredData.filter(
           (student) =>
-            student.currentClass._id === selectedClass._id && // Keep the class filter active
-            student.currentSection._id === value._id // Apply section filter
+            student.currentClass._id === selectedClass._id &&
+            student.currentSection._id === value._id
         );
       } else {
-        // Apply only section filter if no class is selected
         filteredData = filteredData.filter(
           (student) => student.currentSection._id === value._id
         );
@@ -230,8 +227,6 @@ const Attendence = () => {
                 }/api/get-student-attendance-summary/${student._id}`
               );
 
-              console.log("data", data.data.percentage);
-
               const attendancePercentage = data?.data?.percentage || 99;
               const present = data?.data?.present || 0;
               const absent = data?.data?.absent || 0;
@@ -242,7 +237,7 @@ const Attendence = () => {
                 present: present,
                 absent: absent,
                 total: total,
-                grade: "A", // Example grade
+                grade: "A",
               };
             } catch (error) {
               console.error(
@@ -251,17 +246,13 @@ const Attendence = () => {
               );
               return {
                 ...student,
-                attendancePercentage: 0, // Default in case of error
-                grade: "A", // Example grade
+                attendancePercentage: 0,
+                grade: "A",
               };
             }
           })
         );
 
-        console.log(
-          "Updated student data with attendance percentage:",
-          updatedResponse
-        );
         setStudentData(updatedResponse);
         setFilteredStudentData(updatedResponse);
       }
@@ -300,7 +291,7 @@ const Attendence = () => {
       ) : (
         <Datatable
           columns={columns}
-          data={filteredStudentData} // Use filtered data here
+          data={filteredStudentData}
           actions={{
             onView: (item) => handleView(item),
             onPresent: (item) => handleAttendance(item, "Present"),

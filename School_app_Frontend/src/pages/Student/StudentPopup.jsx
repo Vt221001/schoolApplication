@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAPI } from "../../utility/api/apiCall";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 
 const StudentSearchPopup = ({
@@ -67,6 +67,8 @@ const StudentSearchPopup = ({
       studentIds: [selectedStudentId],
       parentId: parent._id,
     };
+
+    console.log("Adding sibling:", payload);
 
     try {
       const response = await axios.put(
@@ -156,7 +158,6 @@ const StudentSearchPopup = ({
           </div>
         )}
       </div>
-      <ToastContainer />
     </div>
   );
 };

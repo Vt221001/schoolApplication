@@ -138,6 +138,10 @@ const StudentAddFillForm = () => {
 
   const handlePrint = async (item) => {
     console.log("Viewing student attendance:", item);
+    // navigate(`/school/student-pre-fill-form/${item}`);
+    navigate(`/school/student-pre-fill-form/${item}`, {
+      state: { studentId: item },
+    });
   };
 
   return (
