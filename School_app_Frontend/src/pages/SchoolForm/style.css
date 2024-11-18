@@ -16,8 +16,7 @@
 
   /* Ensure the print container has no margins */
   .print-container {
-    transform: scale(0.75);
-    transform-origin: top left;
+    zoom: 0.75;
   }
 
   /* Page break styling */

@@ -78,13 +78,13 @@ const StudentAddForm = () => {
               </p>
             </div>
 
-            <div className="hidden lg:block">
+            {/* <div className="hidden lg:block">
               <p className="text-sm flex justify-center text-green-500 italic">
                 "Excellence in Education"
               </p>
-            </div>
+            </div> */}
             {/* Important Instructions */}
-            {/* <div className="mb-8 p-6 border-l-4 border-y-2 borde  border-vibrant-green bg-indigo-100 rounded-lg">
+            <div className="mb-8 p-6 border-l-4 border-y-2 borde  border-vibrant-green bg-indigo-100 rounded-lg">
               <h2 className="text-2xl font-semibold text-indigo-800 underline mb-4 flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ const StudentAddForm = () => {
                   Ensure all information provided is accurate and up-to-date.
                 </li>
               </ul>
-            </div> */}
+            </div>
 
             {/* <hr className="border-t-2 border-vibrant-green mb-8" /> */}
 
@@ -256,14 +256,14 @@ const StudentAddForm = () => {
 
               {/* Address */}
               <div className="mb-6">
-                <label className="block font-medium mb-2 text-indigo-800">
+                <label className=" font-medium mb-2 text-indigo-800">
                   Address
                 </label>
-                <div className="border border-gray-500 h-24"></div>
+                <div className="border-2 border-indigo-800 h-24"></div>
               </div>
 
               {/* Mobile Number and Email */}
-              <div className="grid grid-cols-2 gap-8 mb-6">
+              <div className="grid grid-cols-2 gap-8 mb-20">
                 {/* Mobile Number */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
@@ -280,8 +280,11 @@ const StudentAddForm = () => {
                 </div>
               </div>
 
+              {/* Page Break for Printing */}
+              <div className="page-break"></div>
+
               {/* Blood Group, House, Medical History */}
-              <div className="grid grid-cols-3 gap-8 mb-6">
+              <div className="grid grid-cols-3 gap-8 mb-6 mt-10">
                 {/* Blood Group */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
@@ -304,9 +307,6 @@ const StudentAddForm = () => {
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
               </div>
-
-              {/* Page Break for Printing */}
-              <div className="page-break"></div>
 
               {/* Parent Information */}
               <h2 className="text-2xl font-semibold mt-12 mb-6 text-indigo-800 border-b-2 border-indigo-800 pb-2">
