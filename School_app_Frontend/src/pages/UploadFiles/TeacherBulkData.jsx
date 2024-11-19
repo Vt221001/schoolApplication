@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const StudentAndParentExcelUpload = () => {
+const TeacherBulkData = () => {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -23,7 +23,7 @@ const StudentAndParentExcelUpload = () => {
       const response = await fetch(
         `${
           import.meta.env.VITE_BACKEND_URL
-        }/api/upload-bulk-students/${schoolId}`,
+        }/api/bulk-upload-teacher/${schoolId}`,
         {
           method: "POST",
           body: formData,
@@ -47,7 +47,7 @@ const StudentAndParentExcelUpload = () => {
   return (
     <div className="flex flex-col items-center bg-[#283046] p-6 rounded shadow-md max-w-lg mx-auto">
       <h2 className="text-2xl font-semibold text-black mb-6">
-        Upload Student and Parent Data (Excel File)
+        Upload Teacher Data (Excel File)
       </h2>
       <input
         type="file"
@@ -65,4 +65,4 @@ const StudentAndParentExcelUpload = () => {
   );
 };
 
-export default StudentAndParentExcelUpload;
+export default TeacherBulkData;
