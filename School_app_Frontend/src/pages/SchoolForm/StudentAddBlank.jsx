@@ -84,8 +84,8 @@ const StudentAddForm = () => {
               </p>
             </div> */}
             {/* Important Instructions */}
-            <div className="mb-8 p-6 border-l-4 border-y-2 borde  border-vibrant-green bg-indigo-100 rounded-lg">
-              <h2 className="text-2xl font-semibold text-indigo-800 underline mb-4 flex items-center">
+            <div className="mb-8 px-4 border-l-4 border-y-2 borde  border-vibrant-green bg-indigo-100 rounded-lg">
+              <h2 className="text-lg font-semibold text-indigo-800 underline mb-4 flex items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-6 w-6 mr-2 text-indigo-700"
@@ -103,15 +103,15 @@ const StudentAddForm = () => {
                 Important Instructions
               </h2>
               <ul className="list-disc list-inside ml-4 text-gray-800 space-y-2">
-                <li className="text-lg">
+                <li className="text-sm">
                   Please fill out all required fields marked with an asterisk
                   (*).
                 </li>
-                <li className="text-lg">Use block letters for clarity.</li>
-                <li className="text-lg">
+                <li className="text-sm">Use block letters for clarity.</li>
+                <li className="text-sm">
                   Attach recent photographs where indicated.
                 </li>
-                <li className="text-lg">
+                <li className="text-sm">
                   Ensure all information provided is accurate and up-to-date.
                 </li>
               </ul>
@@ -127,10 +127,10 @@ const StudentAddForm = () => {
               </h2>
 
               {/* Student Photo and Basic Details */}
-              <div className="grid grid-cols-3 gap-8 mb-6">
+              <div className="grid grid-cols-3 gap-8 mb-0">
                 {/* Student Photo Placeholder */}
                 <div className="col-span-1">
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-1 text-indigo-800">
                     Student Photo
                   </label>
                   <div className="border-2 border-green-500 h-40 w-32"></div>
@@ -139,28 +139,28 @@ const StudentAddForm = () => {
                 <div className="col-span-2 grid grid-cols-2 gap-8">
                   {/* Admission Number */}
                   <div>
-                    <label className="block font-medium mb-2 text-indigo-800">
+                    <label className="block font-medium mb-0 text-indigo-800">
                       Admission Number *
                     </label>
                     <div className="border-b border-gray-500 h-10"></div>
                   </div>
                   {/* Roll Number */}
                   <div>
-                    <label className="block font-medium mb-2 text-indigo-800">
+                    <label className="block font-medium mb-0 text-indigo-800">
                       Roll Number
                     </label>
                     <div className="border-b border-gray-500 h-10"></div>
                   </div>
                   {/* First Name (Increased Width) */}
                   <div className="col-span-2">
-                    <label className="block font-medium mb-2 text-indigo-800">
+                    <label className="block font-medium mb-0 text-indigo-800">
                       First Name *
                     </label>
                     <div className="border-b border-gray-500 h-10"></div>
                   </div>
                   {/* Last Name (Increased Width) */}
-                  <div className="col-span-2">
-                    <label className="block font-medium mb-2 text-indigo-800">
+                  <div className="col-span-2 mb-4">
+                    <label className="block font-medium text-indigo-800">
                       Last Name
                     </label>
                     <div className="border-b border-gray-500 h-10"></div>
@@ -172,21 +172,21 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-3 gap-8 mb-6">
                 {/* Current Class */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Current Class *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Current Section */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Current Section *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Current Session */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Current Session *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -197,14 +197,14 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Gender */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Gender *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Date of Birth */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Date of Birth
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -215,21 +215,21 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-3 gap-8 mb-6">
                 {/* Category */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Category
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Religion */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Religion
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Caste */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Caste
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -238,17 +238,24 @@ const StudentAddForm = () => {
 
               {/* Age and Admission Date */}
               <div className="grid grid-cols-2 gap-8 mb-6">
-                {/* Age */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Age
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
-                {/* Admission Date */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Admission Date
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-8 mb-6">
+                <div>
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Student Addhar Number
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
@@ -263,17 +270,17 @@ const StudentAddForm = () => {
               </div>
 
               {/* Mobile Number and Email */}
-              <div className="grid grid-cols-2 gap-8 mb-20">
+              <div className="grid grid-cols-2 gap-8 mb-00">
                 {/* Mobile Number */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Mobile Number *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Email */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Email *
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -287,21 +294,27 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-3 gap-8 mb-6 mt-10">
                 {/* Blood Group */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Blood Group
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* House */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     House
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Medical History */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Medical History
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
+                <div>
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Medical History
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -315,7 +328,7 @@ const StudentAddForm = () => {
 
               {/* Parent Photo */}
               <div className="mb-6">
-                <label className="block font-medium mb-2 text-indigo-800">
+                <label className="block font-medium mb-1 text-indigo-800">
                   Parent/Guardian Photo
                 </label>
                 <div className="border-2 border-green-500 h-40 w-32"></div>
@@ -323,7 +336,7 @@ const StudentAddForm = () => {
 
               {/* Father's Details */}
               <div className="mb-6">
-                <label className="block font-medium mb-2 text-indigo-800">
+                <label className="block font-medium mb-0 text-indigo-800">
                   Father's Name *
                 </label>
                 <div className="border-b border-gray-500 h-10"></div>
@@ -331,14 +344,14 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Father's Phone */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Father's Phone
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Father's Occupation */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Father's Occupation
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -347,7 +360,7 @@ const StudentAddForm = () => {
 
               {/* Mother's Details */}
               <div className="mb-6">
-                <label className="block font-medium mb-2 text-indigo-800">
+                <label className="block font-medium mb-0 text-indigo-800">
                   Mother's Name
                 </label>
                 <div className="border-b border-gray-500 h-10"></div>
@@ -355,15 +368,27 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Mother's Phone */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Mother's Phone
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Mother's Occupation */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Mother's Occupation
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
+                <div>
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Father Addhar Number
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
+                <div>
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Mother Addhar Number
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
@@ -373,14 +398,14 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Guardian Is */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Guardian Is
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Guardian's Name */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Guardian's Name
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
@@ -389,25 +414,33 @@ const StudentAddForm = () => {
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Guardian's Relation */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Guardian's Relation
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
                 {/* Guardian's Phone */}
                 <div>
-                  <label className="block font-medium mb-2 text-indigo-800">
+                  <label className="block font-medium mb-0 text-indigo-800">
                     Guardian's Phone
                   </label>
                   <div className="border-b border-gray-500 h-10"></div>
                 </div>
               </div>
-              <div className="mb-6">
-                {/* Guardian's Occupation */}
-                <label className="block font-medium mb-2 text-indigo-800">
-                  Guardian's Occupation
-                </label>
-                <div className="border-b border-gray-500 h-10"></div>
+              <div className="grid grid-cols-2 gap-8 mb-6">
+                <div className="mb-6">
+                  {/* Guardian's Occupation */}
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Guardian's Occupation
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
+                <div>
+                  <label className="block font-medium mb-0 text-indigo-800">
+                    Family id no
+                  </label>
+                  <div className="border-b border-gray-500 h-10"></div>
+                </div>
               </div>
 
               {/* Guardian's Address */}
@@ -415,11 +448,11 @@ const StudentAddForm = () => {
                 <label className="block font-medium mb-2 text-indigo-800">
                   Guardian's Address
                 </label>
-                <div className="border border-gray-500 h-24"></div>
+                <div className="border-2 border-gray-500 h-24"></div>
               </div>
 
               {/* Signature Fields */}
-              <div className="grid grid-cols-2 gap-8 mt-16">
+              <div className="grid grid-cols-2 gap-8 mt-12">
                 <div className="text-center">
                   <div className="border-t border-gray-500 mt-12"></div>
                   <p className="mt-2 font-medium text-indigo-800">
