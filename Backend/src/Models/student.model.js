@@ -122,7 +122,7 @@ const studentSchema = new mongoose.Schema({
     ],
     marks: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,   
             ref: "Marks",
         },
     ],

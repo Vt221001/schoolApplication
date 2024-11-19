@@ -7,6 +7,11 @@ import { ApiResponse } from "../Utils/responseHandler.js";
 import wrapAsync from "../Utils/wrapAsync.js";
 import jwt from "jsonwebtoken";
 import { StaffAttendance } from "../Models/staffAttendence.Model.js";
+import { staffValidationSchema } from "../Validation/staff.Validation.js";
+import fs from "fs";
+import csv from "csv-parser";
+import path from "path";
+import xlsx from "xlsx";
 
 const generateAccessAndRefreshTokens = async (staffId, next) => {
     const staff = await Staff.findById(staffId);
@@ -253,4 +258,106 @@ export const getAttendanceAndStaffCount = wrapAsync(async (req, res) => {
     };
 
     return res.status(200).json(new ApiResponse(200, response));
+});
+
+export const uploadBulkStaffData = wrapAsync(async (req, res) => {
+    if (!req.file) {
+        return res
+            .status(400)
+            .json(new ApiResponse(400, null, "Please upload a file"));
+    }
+
+    const schoolId = req.params.schoolId;
+    const filePath = req.file.path;
+    const staffData = [];
+    const errors = [];
+    const processedStaffs = [];
+
+    try {
+        const fileExtension = path.extname(req.file.originalname).toLowerCase();
+        let parsedData = [];
+
+        if (fileExtension === ".csv") {
+            await new Promise((resolve, reject) => {
+                fs.createReadStream(filePath)
+                    .pipe(csv())
+                    .on("data", (row) => {
+                        parsedData.push(row);
+                    })
+                    .on("end", resolve)
+                    .on("error", reject);
+            });
+        } else if (fileExtension === ".xls" || fileExtension === ".xlsx") {
+            const workBook = xlsx.readFile(filePath);
+            const sheetName = workBook.SheetNames[0];
+            const worksheet = workBook.Sheets[sheetName];
+            parsedData = xlsx.utils.sheet_to_json(worksheet, { defval: null });
+        } else {
+            throw new ApiError(400, "Invalid file format");
+        }
+
+        parsedData.forEach((row) => {
+            staffData.push(row);
+        });
+
+        const schoolDoc = await School.findById(schoolId);
+        if (!schoolDoc) {
+            return res
+                .status(404)
+                .json(new ApiResponse(404, null, "School not found."));
+        }
+
+        for (let i = 0; i < staffData.length; i++) {
+            const data = staffData[i];
+
+            const existingStaff = await Staff.findOne({ email: data.email });
+            if (existingStaff) {
+                errors.push({
+                    email: data.email,
+                    message: `Staff with email ${data.email} already exists. Skipping this record.`,
+                });
+                continue;
+            }
+
+            const newStaff = new Staff({
+                ...data,
+                school: schoolId,
+            });
+
+            const savedStaff = await newStaff.save();
+            processedStaffs.push(savedStaff);
+
+            schoolDoc.workingStaffs.addToSet(savedStaff._id);
+        }
+
+        await schoolDoc.save();
+        fs.unlinkSync(filePath);
+
+        return res.status(207).json(
+            new ApiResponse(
+                207,
+                {
+                    successfulStaffs: processedStaffs,
+                    errors: errors,
+                },
+                "Bulk upload processed with some errors."
+            )
+        );
+    } catch (err) {
+        console.error(err);
+
+        if (fs.existsSync(req.file.path)) {
+            fs.unlinkSync(req.file.path);
+        }
+
+        return res
+            .status(500)
+            .json(
+                new ApiResponse(
+                    500,
+                    null,
+                    "An error occurred during bulk upload."
+                )
+            );
+    }
 });

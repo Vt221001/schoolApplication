@@ -80,6 +80,8 @@ import AddSubjects from "./pages/Academic/AddSubjects.jsx";
 import StudentAddBlank from "./pages/SchoolForm/StudentAddBlank.jsx";
 import StudentAddFillForm from "./pages/SchoolForm/StudentAddFillForm.jsx";
 import StudentPreFilledFrom from "./pages/SchoolForm/StudentPreFilledFrom.jsx";
+import TeacherBulkData from "./pages/UploadFiles/TeacherBulkData.jsx";
+import StaffBulkData from "./pages/UploadFiles/StaffBulkData.jsx";
 
 const App = () => {
   const { userRole, authToken, loading } = useAuth();
@@ -744,7 +746,7 @@ const App = () => {
             path="/school/upload-teacher-records"
             element={
               <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
+                <TeacherBulkData />
               </RoleBasedAccess>
             }
           />
@@ -760,7 +762,7 @@ const App = () => {
             path="/school/upload-staff-records"
             element={
               <RoleBasedAccess allowedRoles={["Admin"]}>
-                <WorkInProgress />
+                <StaffBulkData />
               </RoleBasedAccess>
             }
           />
