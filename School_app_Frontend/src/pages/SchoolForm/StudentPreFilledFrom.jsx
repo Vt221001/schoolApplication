@@ -4,6 +4,7 @@ import logo2 from "../../assets/logo.png";
 import { useReactToPrint } from "react-to-print";
 import "./style.css";
 import { useLocation, useParams } from "react-router-dom";
+import formatDate from "../../utility/Helper/formateDate";
 
 const StudentPreFilledFrom = () => {
   const location = useLocation();
@@ -78,7 +79,7 @@ const StudentPreFilledFrom = () => {
 
             <div className=" lg:block">
               <p className="text-xl my-2 font-semibold flex justify-center text-red-500 italic">
-                Session 20___ - 20___
+                Session: {studentId.currentSession.sessionYear}
               </p>
             </div>
 
@@ -137,7 +138,13 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Student Photo
                   </label>
-                  <div className="border-2 border-green-500 h-40 w-32"></div>
+                  <div className="border-2 rounded-xl border-green-500 h-40 w-32">
+                    <img
+                      src={studentId.studentPhoto}
+                      alt="Student Photo"
+                      className="h-full rounded-xl w-full object-cover"
+                    />
+                  </div>
                 </div>
                 {/* Basic Details */}
                 <div className="col-span-2 grid grid-cols-2 gap-8">
@@ -218,14 +225,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Gender *
                   </label>
-                  <div className="border-b border-gray-500 h-10">{studentId.gender}</div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.gender}
+                  </div>
                 </div>
                 {/* Date of Birth */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Date of Birth
                   </label>
-                  <div className="border-b border-gray-500 h-10">{studentId.dateOfBirth}</div>
+                  <div className="border-b border-gray-500 h-10">
+                    {formatDate(studentId.dateOfBirth)}
+                  </div>
                 </div>
               </div>
 
@@ -236,21 +247,27 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Category
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.category}
+                  </div>
                 </div>
                 {/* Religion */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Religion
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.religion}
+                  </div>
                 </div>
                 {/* Caste */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Caste
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.caste || "N/A"}
+                  </div>
                 </div>
               </div>
 
@@ -261,14 +278,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Age
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.age}
+                  </div>
                 </div>
                 {/* Admission Date */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Admission Date
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {formatDate(studentId.admissionDate)}
+                  </div>
                 </div>
               </div>
 
@@ -277,7 +298,9 @@ const StudentPreFilledFrom = () => {
                 <label className=" font-medium mb-2 text-indigo-800">
                   Address
                 </label>
-                <div className="border-2 border-indigo-800 h-24"></div>
+                <div className="border-2 p-2 border-indigo-800 h-24">
+                  {studentId.address}
+                </div>
               </div>
 
               {/* Mobile Number and Email */}
@@ -287,14 +310,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Mobile Number *
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.mobileNumber}
+                  </div>
                 </div>
                 {/* Email */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Email *
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.email}
+                  </div>
                 </div>
               </div>
 
@@ -308,21 +335,27 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Blood Group
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.bloodGroup}
+                  </div>
                 </div>
                 {/* House */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     House
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.house}
+                  </div>
                 </div>
                 {/* Medical History */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Medical History
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.medicalHistory}
+                  </div>
                 </div>
               </div>
 
@@ -334,9 +367,15 @@ const StudentPreFilledFrom = () => {
               {/* Parent Photo */}
               <div className="mb-6">
                 <label className="block font-medium mb-2 text-indigo-800">
-                  Parent/Guardian Photo
+                  Parent / Guardian Photo
                 </label>
-                <div className="border-2 border-green-500 h-40 w-32"></div>
+                <div className="border-2 rounded-xl border-green-500 h-40 w-32">
+                  <img
+                    src={studentId.parent.guardianPhoto || "https://i.pinimg.com/originals/4c/cd/08/4ccd086a8b7970c7a1ab4961e9bfcafc.jpg"}
+                    alt="Student Photo"
+                    className="h-full rounded-xl w-full object-fill"
+                  />
+                </div>
               </div>
 
               {/* Father's Details */}
@@ -344,7 +383,9 @@ const StudentPreFilledFrom = () => {
                 <label className="block font-medium mb-2 text-indigo-800">
                   Father's Name *
                 </label>
-                <div className="border-b border-gray-500 h-10"></div>
+                <div className="border-b border-gray-500 h-10">
+                  {studentId.parent.fatherName}
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Father's Phone */}
@@ -352,14 +393,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Father's Phone
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.fatherPhone}
+                  </div>
                 </div>
                 {/* Father's Occupation */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Father's Occupation
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.fatherOccupation}
+                  </div>
                 </div>
               </div>
 
@@ -368,7 +413,9 @@ const StudentPreFilledFrom = () => {
                 <label className="block font-medium mb-2 text-indigo-800">
                   Mother's Name
                 </label>
-                <div className="border-b border-gray-500 h-10"></div>
+                <div className="border-b border-gray-500 h-10">
+                  {studentId.parent.motherName}
+                </div>
               </div>
               <div className="grid grid-cols-2 gap-8 mb-6">
                 {/* Mother's Phone */}
@@ -376,14 +423,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Mother's Phone
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.motherPhone}
+                  </div>
                 </div>
                 {/* Mother's Occupation */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Mother's Occupation
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.motherOccupation}
+                  </div>
                 </div>
               </div>
 
@@ -394,14 +445,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Guardian Is
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.guardianIs}
+                  </div>
                 </div>
                 {/* Guardian's Name */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Guardian's Name
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.guardianName}
+                  </div>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-8 mb-6">
@@ -410,14 +465,18 @@ const StudentPreFilledFrom = () => {
                   <label className="block font-medium mb-2 text-indigo-800">
                     Guardian's Relation
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.guardianRelation || "Father"}
+                  </div>
                 </div>
                 {/* Guardian's Phone */}
                 <div>
                   <label className="block font-medium mb-2 text-indigo-800">
                     Guardian's Phone
                   </label>
-                  <div className="border-b border-gray-500 h-10"></div>
+                  <div className="border-b border-gray-500 h-10">
+                    {studentId.parent.guardianPhone || "+91 XXXXXXXXXX"}
+                  </div>
                 </div>
               </div>
               <div className="mb-6">
@@ -425,7 +484,9 @@ const StudentPreFilledFrom = () => {
                 <label className="block font-medium mb-2 text-indigo-800">
                   Guardian's Occupation
                 </label>
-                <div className="border-b border-gray-500 h-10"></div>
+                <div className="border-b border-gray-500 h-10">
+                  {studentId.parent.gurdianOccupation || "N/A"}
+                </div>
               </div>
 
               {/* Guardian's Address */}
@@ -433,19 +494,23 @@ const StudentPreFilledFrom = () => {
                 <label className="block font-medium mb-2 text-indigo-800">
                   Guardian's Address
                 </label>
-                <div className="border border-gray-500 h-24"></div>
+                <div className="border p-2 border-gray-500 h-24">
+                  {studentId.parent.guardianAddress}
+                </div>
               </div>
 
               {/* Signature Fields */}
               <div className="grid grid-cols-2 gap-8 mt-16">
                 <div className="text-center">
-                  <div className="border-t border-gray-500 mt-12"></div>
+                  <div className="border-b border-gray-500 mt-12">Ramesh</div>
                   <p className="mt-2 font-medium text-indigo-800">
                     Parent/Guardian Signature
                   </p>
                 </div>
                 <div className="text-center">
-                  <div className="border-t border-gray-500 mt-12"></div>
+                  <div className="border-b border-gray-500 mt-12">
+                    {formatDate(Date.now())}
+                  </div>
                   <p className="mt-2 font-medium text-indigo-800">Date</p>
                 </div>
               </div>

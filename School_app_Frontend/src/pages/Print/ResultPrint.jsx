@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import { dateFnsLocalizer } from "react-big-calendar";
+import logo2 from "../../assets/psign.png";
 
 const ResultPrint = ({ data2 }) => {
   // Hard-coded data (replace with your API response data)
@@ -251,23 +252,29 @@ const ResultPrint = ({ data2 }) => {
         </table>
       </div> */}
 
-      <div className="mt-12 p-6 border-2 border-black">
-        <div className="flex justify-between mt-8">
+      <div className="mt-12 px-6 py-1 border-2 border-black">
+        <div className="flex justify-between mt-0">
           {/* Class Teacher Signature */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mt-16">
             <div className="w-48 border-b-2 border-gray-500 mb-2"></div>
             <p className="text-sm font-semibold">Class Teacher's Signature</p>
           </div>
 
           {/* Teacher Signature */}
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center mt-16">
             <div className="w-48 border-b-2 border-gray-500 mb-2"></div>
             <p className="text-sm font-semibold">Teacher's Signature</p>
           </div>
 
           {/* Principal Signature */}
           <div className="flex flex-col items-center">
-            <div className="w-48 border-b-2 border-gray-500 mb-2"></div>
+            <div className="w-48 border-b-2 border-gray-500 mb-2">
+            <img
+                  src={logo2}
+                  alt="School Logo"
+                  className="h-full w-full object-fit"
+                />
+            </div>
             <p className="text-sm font-semibold">Principal's Signature</p>
           </div>
         </div>
