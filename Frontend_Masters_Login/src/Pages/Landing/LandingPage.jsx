@@ -22,6 +22,11 @@ import { useNavigate } from "react-router-dom";
 
 const TrainingStudio = () => {
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleLogin = () => {
     navigate("/login");
@@ -42,36 +47,98 @@ const TrainingStudio = () => {
       </div> */}
 
       {/* Header */}
-      <header className="header-area header-sticky">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <nav className="main-nav">
-                <a href="/" className="logo">
-                  Easy<em> India ERP</em>
+      <header className="header-area header-sticky bg-black shadow-md">
+        <div className="container mx-auto main-nav">
+          <div className="row flex justify-between items-center ">
+            {/* Logo */}
+            <a href="/" className="logo mt-4">
+              <h2><strong>Easy</strong><em> India ERP</em></h2>
+            </a>
+
+            {/* Menu - Desktop */}
+            <ul className="hidden md:flex nav">
+              <li className="scroll-to-section">
+                <a
+                  href="#top"
+                  className=" hover:text-indigo-500 active"
+                >
+                  Home
                 </a>
-                <ul className="nav">
-                  <li className="scroll-to-section">
-                    <a href="#top" className="active">
-                      Home
-                    </a>
-                  </li>
-                  <li className="scroll-to-section">
-                    <a href="#features">About</a>
-                  </li>
-                  <li className="scroll-to-section">
-                    <a href="#contact-us">Contact</a>
-                  </li>
-                  <li className="main-button" onClick={handleLogin}>
-                    <a>Login</a>
-                  </li>
-                </ul>
-                <a className="menu-trigger">
-                  <span>Menu</span>
+              </li>
+              <li className="scroll-to-section">
+                <a
+                  href="#features"
+                  className="text-gray-700 hover:text-indigo-500"
+                >
+                  About
                 </a>
-              </nav>
-            </div>
+              </li>
+              <li className="scroll-to-section">
+                <a
+                  href="#contact-us"
+                  className="text-gray-700 hover:text-indigo-500"
+                >
+                  Contact
+                </a>
+              </li>
+              <li className="main-button">
+                <a
+                  onClick={handleLogin}
+                  className=""
+                >
+                  Login
+                </a>
+              </li>
+            </ul>
+
+            {/* Mobile Menu Trigger */}
+            <button
+              className="menu-trigger md:hidden focus:outline-none"
+              onClick={toggleMenu}
+            >
+              <span className="material-icons text-gray-700">menu</span>
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          <ul
+            className={`md:hidden flex flex-col space-y-4 bg-gray-50 p-4 rounded-lg ${
+              isMenuOpen ? "block" : "hidden"
+            }`}
+          >
+            <li className="scroll-to-section">
+              <a
+                href="#top"
+                className="text-gray-700 hover:text-indigo-500 active"
+              >
+                Home
+              </a>
+            </li>
+            <li className="scroll-to-section">
+              <a
+                href="#features"
+                className="text-gray-700 hover:text-indigo-500"
+              >
+                About
+              </a>
+            </li>
+            <li className="scroll-to-section">
+              <a
+                href="#contact-us"
+                className="text-gray-700 hover:text-indigo-500"
+              >
+                Contact
+              </a>
+            </li>
+            <li className="main-button">
+              <button
+                onClick={handleLogin}
+                className="text-white bg-indigo-500 hover:bg-indigo-600 py-2 px-4 rounded-lg"
+              >
+                Login
+              </button>
+            </li>
+          </ul>
         </div>
       </header>
 
@@ -93,7 +160,10 @@ const TrainingStudio = () => {
               <div className="main-button scroll-to-section">
                 <a href="#features">Become a member</a>
               </div>
-              <div className="main-button scroll-to-section" onClick={handleLogin}>
+              <div
+                className="main-button scroll-to-section"
+                onClick={handleLogin}
+              >
                 <a href="#features">Go to Login</a>
               </div>
             </div>
