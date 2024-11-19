@@ -1,7 +1,7 @@
 import React from "react";
 import loginImg1 from "../../assets/loginImg1.jpg";
 import loginImg2 from "../../assets/loginImg2.jpg";
-import aradhyaFullLogo from "../../assets/aradhyaFullLogo.png";
+import aradhyaFullLogo from "../../assets/pngegg_b2.png";
 
 const LoginForm = ({
   email,
