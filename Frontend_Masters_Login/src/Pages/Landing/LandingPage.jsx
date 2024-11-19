@@ -89,8 +89,13 @@ const TrainingStudio = () => {
             <h2>
               easy with our <em>CRM School Application</em>
             </h2>
-            <div className="main-button scroll-to-section">
-              <a href="#features">Become a member</a>
+            <div className="flex justify-center gap-4">
+              <div className="main-button scroll-to-section">
+                <a href="#features">Become a member</a>
+              </div>
+              <div className="main-button scroll-to-section" onClick={handleLogin}>
+                <a href="#features">Go to Login</a>
+              </div>
             </div>
           </div>
         </div>
@@ -230,12 +235,15 @@ const TrainingStudio = () => {
                   Empower your school with seamless management and smarter
                   connections.
                 </p>
-                <div className="flex justify-center gap-4">
+                <div className="flex justify-center gap-4 sm:flex-wrap">
                   <div className="main-button scroll-to-section">
                     <a href="#our-classes">Get Started for Free</a>
                   </div>
                   <div className="main-button scroll-to-section">
                     <a href="#our-classes">Become a member</a>
+                  </div>
+                  <div className="main-button scroll-to-section">
+                    <a href="#our-classes">Login to Dashboard</a>
                   </div>
                 </div>
               </div>
@@ -348,7 +356,8 @@ const TrainingStudio = () => {
       </section>
 
       <section
-        class="bg-cover bg-center py-20" id="contact-us"
+        class="bg-cover bg-center py-20"
+        id="contact-us"
         style={{
           backgroundImage: `url(${contact})`,
           backgroundSize: "cover",
