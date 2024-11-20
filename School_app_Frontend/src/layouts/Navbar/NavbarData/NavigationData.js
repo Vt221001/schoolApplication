@@ -412,6 +412,45 @@ export const navigation = [
     ],
   },
   {
+    name: "Transport",
+    to: "/transpost",
+    icon: FaDollarSign,
+    current: false,
+    roles: ["Admin"],
+    children: [
+      {
+        name: "Add Transport",
+        to: "/school/add-transport",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+      {
+        name: "Add Route",
+        to: "/school/fees-installment",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+      {
+        name: "Student Fees",
+        to: "/school/student-fees-page",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+      {
+        name: "Class Fee Records",
+        to: "/school/class-fees-record",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+      {
+        name: "Monthly Fees Payment",
+        to: "/school/monthly-fees-payment",
+        icon: FaRegCircle,
+        roles: ["Admin"],
+      },
+    ],
+  },
+  {
     name: "My Attendance",
     to: "/school/student-attendance-view",
     icon: FaBell,
