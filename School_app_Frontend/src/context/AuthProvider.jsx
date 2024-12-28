@@ -156,7 +156,8 @@ export const AuthProvider = ({ children }) => {
     }
 
     setIsLoggingOut(false);
-    window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
+    // window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
+    window.location.href = "https://mainpage.vedanshtiwari.tech";
     setLoading(false); // Hide loader after logout
   };
 
