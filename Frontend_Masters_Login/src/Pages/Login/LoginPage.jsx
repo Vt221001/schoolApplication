@@ -5,17 +5,17 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState("test@example.com");
   const [role, setRole] = useState("Admin");
   const [error, setError] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("123456");
   const [loader, setLoader] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    let apiEndpoint;                   
-    switch (role) { 
+    let apiEndpoint;
+    switch (role) {
       case "Admin":
         apiEndpoint = `${
           import.meta.env.VITE_BACKEND_URL
@@ -51,8 +51,7 @@ const LoginPage = () => {
         schoolCode: user.schoolCode,
         role: user.role,
         email: user.email,
-        frontendUrl: user.frontendUrl
-
+        frontendUrl: user.frontendUrl,
       });
 
       // JSON string ko URI mein encode karke pass karenge
