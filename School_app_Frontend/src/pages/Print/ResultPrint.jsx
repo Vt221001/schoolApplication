@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import { dateFnsLocalizer } from "react-big-calendar";
-import logo2 from "../../assets/psign.png";
+import logo2 from "../../assets/pSign.png";
 
 const ResultPrint = ({ data2 }) => {
   // Hard-coded data (replace with your API response data)
