@@ -67,12 +67,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center">
-      {loader ? (
-        <div className="flex justify-center items-center">
+    <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center relative">
+      {loader && (
+        <div className="absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
           <PacmanLoader color="#36D7B7" size={50} /> {/* Display loader */}
         </div>
-      ) : (
+      )}
+      <div className={`${loader ? "blur-sm" : ""} w-full`}>
         <LoginForm
           email={email}
           setEmail={setEmail}
@@ -83,7 +84,7 @@ const LoginPage = () => {
           role={role}
           setRole={setRole}
         />
-      )}
+      </div>
       <ToastContainer />
     </div>
   );
