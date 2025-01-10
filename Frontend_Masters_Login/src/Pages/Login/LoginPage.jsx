@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import LoginForm from "./LoginForm";
 import { ToastContainer, toast } from "react-toastify";
+import { PacmanLoader } from "react-spinners"; // Import PacmanLoader
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
@@ -9,7 +10,7 @@ const LoginPage = () => {
   const [role, setRole] = useState("Admin");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("123456");
-  const [loader, setLoader] = useState(false);
+  const [loader, setLoader] = useState(false); // Manage loader state
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +28,7 @@ const LoginPage = () => {
     }
 
     try {
-      setLoader(true);
+      setLoader(true); // Show loader while login is in progress
 
       const response = await axios.post(
         apiEndpoint,
@@ -39,7 +40,6 @@ const LoginPage = () => {
       );
 
       const { accessToken, refreshToken, user } = await response.data.data;
-      const schoolCode = user.schoolCode; // School ka unique code
 
       console.log("Login successful. User:", user);
 
@@ -54,7 +54,6 @@ const LoginPage = () => {
         frontendUrl: user.frontendUrl,
       });
 
-      // JSON string ko URI mein encode karke pass karenge
       const encodedUserData = encodeURIComponent(userData);
       window.location.href = `${user.frontendUrl}/settingupdata?userData=${encodedUserData}`;
 
@@ -63,22 +62,28 @@ const LoginPage = () => {
       toast.error("Login failed. Please check your credentials.");
       setError("Login failed. Please check your credentials.");
     } finally {
-      setLoader(false);
+      setLoader(false); // Hide loader after login attempt
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900 flex justify-center items-center">
-      <LoginForm
-        email={email}
-        setEmail={setEmail}
-        password={password}
-        setPassword={setPassword}
-        handleLogin={handleLogin}
-        error={error}
-        role={role}
-        setRole={setRole}
-      />
+      {loader ? (
+        <div className="flex justify-center items-center">
+          <PacmanLoader color="#36D7B7" size={50} /> {/* Display loader */}
+        </div>
+      ) : (
+        <LoginForm
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          handleLogin={handleLogin}
+          error={error}
+          role={role}
+          setRole={setRole}
+        />
+      )}
       <ToastContainer />
     </div>
   );
