@@ -6,7 +6,7 @@ dotenv.config({
     path: "./.env",
 });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 connectDB()
     .then(() => {
@@ -23,4 +23,3 @@ connectDB()
     .catch((err) => {
         console.log(err);
     });
-
