@@ -49,7 +49,7 @@ const LoginForm = ({
                 <input
                   className="w-full px-4 py-3 md:px-8 md:py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white"
                   type="email"
-                  placeholder="test@example.com"
+                  placeholder="admin@gmail.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
