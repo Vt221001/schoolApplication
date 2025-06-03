@@ -6,7 +6,7 @@ import { PacmanLoader } from "react-spinners"; // Import PacmanLoader
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = () => {
-  const [email, setEmail] = useState("admin@gmail.com");
+  const [email, setEmail] = useState("test@example.com");
   const [role, setRole] = useState("Admin");
   const [error, setError] = useState("");
   const [password, setPassword] = useState("123456");
