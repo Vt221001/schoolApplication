@@ -40,7 +40,7 @@ const app = express();
 // Whitelist of allowed origins
 const whitelist = [
     "http://localhost:5174",
-    "https://school-application-git-main-vedansh-tiwaris-projects-6fb39bc0.vercel.app"
+    "https://school-application-git-main-vedansh-tiwaris-projects-6fb39bc0.vercel.app",
     "https://erp1.vedanshtiwari.tech",
     /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5174$/,
 ];
