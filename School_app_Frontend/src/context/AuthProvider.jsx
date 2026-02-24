@@ -157,7 +157,7 @@ export const AuthProvider = ({ children }) => {
 
     setIsLoggingOut(false);
     // window.location.href = `${import.meta.env.VITE_HOME_REDIRECT_URL}`;
-    window.location.href = "https://mainpage.vedanshtiwari.tech";
+    window.location.href = "https://school-application-git-3a3657-vedansh-tiwaris-projects-6fb39bc0.vercel.app";
     setLoading(false); // Hide loader after logout
   };
 
