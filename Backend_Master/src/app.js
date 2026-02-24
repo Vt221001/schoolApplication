@@ -10,7 +10,7 @@ const app = express();
 const whitelist = [
   "https://mainpage.vedanshtiwari.tech",
   "http://localhost:5174",
-  "https://school-application-uray-hexmljacv.vercel.app",
+  "https://school-application-git-3a3657-vedansh-tiwaris-projects-6fb39bc0.vercel.app",
   "https://new-school-application-haryana-8pqf.vercel.app",
   /^http:\/\/192\.168\.\d{1,3}\.\d{1,3}:5174$/,
 ];
